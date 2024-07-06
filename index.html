@@ -1,12 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="account-page">
+      <form class="signin-form">
+        <h1>Sign In</h1>
+        <label for="signin-email" class="signin-email-label">
+          Email *
+          <input
+            type="email"
+            autocomplete="off"
+            id="signin-email"
+            placeholder="Email"
+            name="signinemail"
+          />
+        </label>
+        <label for="signin-password" class="signin-password-label">
+          Password *
+          <input
+            type="password"
+            id="signin-password"
+            placeholder="Password"
+            name="signinpassword"
+          />
+        </label>
+        <input type="submit" value="Sign In" class="signin-submit-btn" />
+      </form>
+      <form class="signup-form">
+        <h1>Sign Up</h1>
+        <label for="name" class="name-label">
+          Name *
+          <input
+            type="text"
+            id="name"
+            placeholder="Name"
+            name="name"
+            autocomplete="off"
+          />
+        </label>
+        <label for="signup-email" class="signup-email-label">
+          Email *
+          <input
+            type="email"
+            autocomplete="off"
+            id="signup-email"
+            placeholder="Email"
+            name="signupemail"
+          />
+        </label>
+        <label for="signup-password" class="signup-password-label">
+          Password *
+          <input
+            type="password"
+            id="signup-password"
+            placeholder="Password"
+            name="signuppassword"
+          />
+        </label>
+        <label
+          for="signup-confirm-password"
+          class="signup-confirm-password-label"
+        >
+          Confirm Password *
+          <input
+            type="password"
+            id="signup-confirm-password"
+            placeholder="Confirm Password"
+            name="signupconfirmpassword"
+          />
+        </label>
+        <input type="submit" value="Sign Up" class="signup-submit-btn" />
+      </form>
+    </div>
+
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
