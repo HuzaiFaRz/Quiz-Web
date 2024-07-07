@@ -28,20 +28,21 @@ const signUpFormFunctionality = () => {
       console.log("Passowrd Does Not Match ❌");
     }
 
+    let signUpUserInfoSave =
+      JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
+    signUpUserInfoSave.push(signUpUserInfo);
+    localStorage.setItem("signUpUserInfo", JSON.stringify(signUpUserInfoSave));
 
-let new=JSON.parse(localStorage.getItem("signUpUserInfo"))
-let new2=new
+    let w = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
 
-   
-    if (matchingUser) {
-        
-      console.log("User Already Exist Sign In");
-    } else {
-      localStorage.setItem(
-        "signUpUserInfo",
-        JSON.stringify(signUpUserInfoSave)
-      );
+    let o = w.find((user) => {
+      user.email === signUpUserInfo.email;
+    });
+
+    if (o) {
       console.log("Sign Up SuccessFully");
+    } else {
+      console.log("User Already Exist Sign In");
     }
 
     //   signUpForm.reset();
