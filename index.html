@@ -14,29 +14,6 @@
   </head>
   <body>
     <div class="account-page">
-      <form class="signin-form">
-        <h1>Sign In</h1>
-        <label for="signin-email" class="signin-email-label">
-          Email *
-          <input
-            type="email"
-            autocomplete="off"
-            id="signin-email"
-            placeholder="Email"
-            name="signinemail"
-          />
-        </label>
-        <label for="signin-password" class="signin-password-label">
-          Password *
-          <input
-            type="password"
-            id="signin-password"
-            placeholder="Password"
-            name="signinpassword"
-          />
-        </label>
-        <input type="submit" value="Sign In" class="signin-submit-btn" />
-      </form>
       <form class="signup-form">
         <h1>Sign Up</h1>
         <label for="name" class="name-label">
@@ -46,14 +23,14 @@
             id="name"
             placeholder="Name"
             name="name"
-            autocomplete="off"
+            value="huzaifa"
           />
         </label>
         <label for="signup-email" class="signup-email-label">
           Email *
           <input
             type="email"
-            autocomplete="off"
+            value="raza@gmail.com"
             id="signup-email"
             placeholder="Email"
             name="signupemail"
@@ -64,6 +41,7 @@
           <input
             type="password"
             id="signup-password"
+            value="12345678"
             placeholder="Password"
             name="signuppassword"
           />
@@ -75,12 +53,38 @@
           Confirm Password *
           <input
             type="password"
+            value="12345678"
             id="signup-confirm-password"
             placeholder="Confirm Password"
             name="signupconfirmpassword"
           />
         </label>
         <input type="submit" value="Sign Up" class="signup-submit-btn" />
+      </form>
+
+      <form class="signin-form">
+        <h1>Sign In</h1>
+        <label for="signin-email" class="signin-email-label">
+          Email *
+          <input
+            type="email"
+            value="raza@gmail.com"
+            id="signin-email"
+            placeholder="Email"
+            name="signinemail"
+          />
+        </label>
+        <label for="signin-password" class="signin-password-label">
+          Password *
+          <input
+            type="password"
+            id="signin-password"
+            placeholder="Password"
+            value="12345678"
+            name="signinpassword"
+          />
+        </label>
+        <input type="submit" value="Sign In" class="signin-submit-btn" />
       </form>
     </div>
 
