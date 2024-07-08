@@ -1,10 +1,28 @@
+document.body.style.transition = "all 0.3s linear";
 const signUpForm = document.querySelector(".signup-form");
-let signUpUserIsLogged = false;
-
 const signInForm = document.querySelector(".signin-form");
-let signInUserIsLogged = false;
+const createAcountBtns = document.querySelector(".account-Btns");
+const SignUpButton = document.querySelector(".SignUpButton");
+const SignInButton = document.querySelector(".SignInButton");
+
+let userSignedUp = false;
+let userLoggedIn = false;
 
 const signUpFormFunctionality = () => {
+  SignUpButton.addEventListener("click", () => {
+    gsap.to(createAcountBtns, {
+      top: "10%",
+      duration: 0.3,
+      ease: Power2.easeInOut,
+    });
+    gsap.to(signUpForm, {
+      visibility: "visible",
+      opacity: "1",
+      duration: 0.3,
+      ease: Power2.easeInOut,
+    });
+  });
+
   signUpForm.addEventListener("submit", (a) => {
     a.preventDefault();
     const signUpFormData = new FormData(signUpForm);
@@ -22,27 +40,32 @@ const signUpFormFunctionality = () => {
       !signUpUserInfo.confirmPassword
     ) {
       console.log("Fill All Field ❌");
-    } else if (signUpUserInfo.password.length <= 8) {
+    } else if (signUpUserInfo.password.length < 8) {
       console.log("Passowrd At Least Eight Character ❌");
     } else if (signUpUserInfo.password !== signUpUserInfo.confirmPassword) {
       console.log("Passowrd Does Not Match ❌");
-    }
-
-    let signUpUserInfoSave =
-      JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
-    signUpUserInfoSave.push(signUpUserInfo);
-    localStorage.setItem("signUpUserInfo", JSON.stringify(signUpUserInfoSave));
-
-    let w = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
-
-    let o = w.find((user) => {
-      user.email === signUpUserInfo.email;
-    });
-
-    if (o) {
-      console.log("Sign Up SuccessFully");
     } else {
-      console.log("User Already Exist Sign In");
+      let signUpUserInfoSave =
+        JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
+
+      let signUpUserInfoSaveCheck = signUpUserInfoSave.find(
+        (user) =>
+          user.email === signUpUserInfo.email &&
+          user.password === signUpUserInfo.password
+      );
+
+      if (signUpUserInfoSaveCheck) {
+        console.log("User Already Exist Sign In");
+      } else {
+        userSignedUp = true;
+        signUpForm.reset();
+        signUpUserInfoSave.push(signUpUserInfo);
+        localStorage.setItem(
+          "signUpUserInfo",
+          JSON.stringify(signUpUserInfoSave)
+        );
+        console.log("Sign Up SuccessFully");
+      }
     }
 
     //   signUpForm.reset();
@@ -58,28 +81,21 @@ const signUpFormFunctionality = () => {
     ) {
       console.log("Fill All Field ❌");
     } else {
-      let storedUsers =
-        JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
-      let matchingUser = storedUsers.find(
-        (user) => user.email === signInFormData.get("signinemail"),
-        (user) => user.password === signInFormData.get("signinpassword")
+      let saveUser = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
+      let matchingSaveData = saveUser.find(
+        (user) =>
+          user.email === signInFormData.get("signinemail") &&
+          user.password === signInFormData.get("signinpassword")
       );
 
-      if (matchingUser) {
-        signInUserIsLogged = true;
-        if (signInUserIsLogged) {
-          signInForm.reset();
-          console.log("Sign in SuccessFully");
-        }
+      if (matchingSaveData) {
+        userLoggedIn = true;
+        signInForm.reset();
+        console.log("Sign in SuccessFully");
       } else {
         console.log("User Not Found Sign Up ❌");
       }
     }
-
-    // let signInUserInfo = {
-    //   email: signInFormData.get("signinemail"),
-    //   password: signInFormData.get("signinpassword"),
-    // };
   });
 };
 signUpFormFunctionality();

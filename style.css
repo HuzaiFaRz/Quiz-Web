@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: "Jost", sans-serif;
   transition: all 0.2s linear;
+  user-select: none;
 }
 html,
 body {
@@ -24,7 +25,6 @@ body {
   justify-content: space-evenly;
   align-items: center;
   gap: 50px;
-  padding: 20px 20px;
 }
 .account-page::before {
   content: "";
@@ -45,11 +45,11 @@ body {
   width: 700px;
   height: max-content;
   background: url(erik-mclean-sxiSod0tyYQ-unsplash.jpg) no-repeat;
-
   background-position: center;
   background-size: cover;
-  box-shadow: 0 0 30px white;
-  border-radius: 20px;
+  /* box-shadow: 0 0 30px #ffee05; */
+  border: 1px solid #ffee05;
+  border-radius: 20px 20px 0 50px;
   padding: 20px 20px;
 
   display: flex;
@@ -68,15 +68,19 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgb(0, 0, 0, 0.3);
-  backdrop-filter: blur(3px);
+  background-color: rgb(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
 }
 
 .signin-form > h1,
 .signup-form > h1 {
   font-size: 3rem;
+  font-weight: 300;
   z-index: 1111;
+  text-shadow: 5px 5px 30px #ffee05;
   color: white;
+  text-decoration: underline #ffee05;
+  text-underline-offset: 20px;
 }
 .signin-email-label,
 .signin-password-label,
@@ -84,9 +88,11 @@ body {
 .signup-email-label,
 .signup-password-label,
 .signup-confirm-password-label {
+  font-weight: 300;
+  cursor: pointer;
   z-index: 1111;
   width: 100%;
-  color: white;
+  color: #ffee05;
   font-size: 1.6rem;
   display: flex;
   flex-direction: column;
@@ -102,21 +108,18 @@ body {
 #signup-email,
 #signup-password,
 #signup-confirm-password {
+  font-weight: 500;
+  letter-spacing: 1px;
   z-index: 1111;
   width: 100%;
-  background-color: rgb(0, 0, 0, 0.5);
-  box-shadow: 0 0 20px white;
+  background-color: rgb(255, 238, 5, 0.1);
   color: white;
-  border: 1px solid white;
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 15px;
-  height: 50px;
-  border-radius: 5rem;
+  box-shadow: none;
   border: none;
+  font-size: 16px;
+  padding: 0 15px;
+  height: 50px;
+  /* border-radius: 3rem 6rem 0 5rem; */
 }
 #signin-email:focus,
 #signin-password:focus,
@@ -133,26 +136,110 @@ body {
 #signup-password::placeholder,
 #signup-confirm-password::placeholder {
   font-size: 16px;
-  letter-spacing: 1px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   color: white;
 }
-.signin-submit-btn,
-.signup-submit-btn {
+.signup-submit-btn,
+.signin-submit-btn {
+  transition: 0.4s ease-in-out;
+  position: relative;
   padding: 10px 20px;
   z-index: 1111;
-  background-color: rgb(0, 0, 0, 0.5);
-  box-shadow: 0 0 20px white;
+  background-color: rgb(255, 238, 5, 0.1);
   color: white;
-  border: 1px solid white;
+  box-shadow: none;
+  border: none;
   font-size: 1rem;
-  border-radius: 15px;
   cursor: pointer;
 }
-.signin-submit-btn:hover,
-.signup-submit-btn:hover {
-  background-color: rgb(0, 0, 0, 0.9);
-  transform: scale(1.2);
+.signup-submit-btn::before,
+.signup-submit-btn::after,
+.signin-submit-btn::before,
+.signin-submit-btn::after {
+  transition: 0.3s ease-in-out;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
 }
+
+.signup-submit-btn::after,
+.signin-submit-btn::after {
+  transition: 0.3s ease-in-out;
+  top: -8px;
+  left: -8px;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+}
+.signup-submit-btn::before,
+.signin-submit-btn::before {
+  transition: 0.3s ease-in-out;
+  bottom: -8px;
+  right: -8px;
+  border-bottom: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+.signup-submit-btn:hover::before,
+.signup-submit-btn:hover::after,
+.signin-submit-btn:hover::before,
+.signin-submit-btn:hover::after {
+  transition: 0.4s ease-in-out;
+  width: calc(100% + 15px);
+  height: calc(100% + 15px);
+  border-color: #ffee05;
+}
+
+.signup-submit-btn:hover,
+.signin-submit-btn:hover {
+  transition: 0.2s ease-in-out;
+  transform: scale(1.1);
+  border-radius: 20px 20px 0 20px;
+  background-color: rgb(255, 238, 5, 0.3);
+}
+
+.signup-form,
+.signin-form {
+  transition: all 0.4s linear;
+  
+  opacity: 0;
+  visibility: hidden;
+}
+
+.account-Btns {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.SignUpButton,
+.SignInButton {
+  transition: 0.4s ease-in-out;
+  position: relative;
+  padding: 10px 20px;
+  z-index: 1111;
+  background-color: rgb(255, 238, 5, 0.3);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 1px;
+  box-shadow: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.SignUpButton:hover,
+.SignInButton:hover {
+  background-color: rgb(255, 238, 5, 0.7);
+  color: black;
+}
+
 @media (max-width: 1489px) {
   .account-page {
     height: auto;

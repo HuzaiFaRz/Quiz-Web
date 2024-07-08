@@ -18,19 +18,13 @@
         <h1>Sign Up</h1>
         <label for="name" class="name-label">
           Name *
-          <input
-            type="text"
-            id="name"
-            placeholder="Name"
-            name="name"
-            value="huzaifa"
-          />
+          <input type="text" id="name" placeholder="Name" name="name" />
         </label>
         <label for="signup-email" class="signup-email-label">
           Email *
           <input
             type="email"
-            value="raza@gmail.com"
+            autocomplete="off"
             id="signup-email"
             placeholder="Email"
             name="signupemail"
@@ -41,7 +35,6 @@
           <input
             type="password"
             id="signup-password"
-            value="12345678"
             placeholder="Password"
             name="signuppassword"
           />
@@ -53,13 +46,12 @@
           Confirm Password *
           <input
             type="password"
-            value="12345678"
             id="signup-confirm-password"
             placeholder="Confirm Password"
             name="signupconfirmpassword"
           />
         </label>
-        <input type="submit" value="Sign Up" class="signup-submit-btn" />
+        <button type="submit" class="signup-submit-btn">Sign_Up</button>
       </form>
 
       <form class="signin-form">
@@ -68,7 +60,7 @@
           Email *
           <input
             type="email"
-            value="raza@gmail.com"
+            autocomplete="off"
             id="signin-email"
             placeholder="Email"
             name="signinemail"
@@ -80,14 +72,18 @@
             type="password"
             id="signin-password"
             placeholder="Password"
-            value="12345678"
             name="signinpassword"
           />
         </label>
-        <input type="submit" value="Sign In" class="signin-submit-btn" />
+        <button type="submit" class="signin-submit-btn">Sign_In</button>
       </form>
-    </div>
 
+      <div class="account-Btns">
+        <button class="SignUpButton">Sign Up</button>
+        <button class="SignInButton">Sign In</button>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="app.js"></script>
   </body>
 </html>
