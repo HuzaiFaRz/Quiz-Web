@@ -12,14 +12,17 @@ const signUpFormFunctionality = () => {
   SignUpButton.addEventListener("click", () => {
     gsap.to(createAcountBtns, {
       top: "10%",
-      duration: 0.3,
-      ease: Power2.easeInOut,
+      duration: 0.6,
+      ease: Power1.easeInOut,
     });
     gsap.to(signUpForm, {
+      width:"100%",
+      height:"max-content",
       visibility: "visible",
       opacity: "1",
-      duration: 0.3,
-      ease: Power2.easeInOut,
+      scale: 1,
+      duration: 0.6,
+      ease: Power1.easeInOut,
     });
   });
 
