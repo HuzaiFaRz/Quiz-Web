@@ -13,18 +13,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="account-page">
+    <main>
+        <div class="account-page">
       <form class="signup-form">
         <h1>Sign Up</h1>
         <label for="name" class="name-label">
           Name *
-          <input type="text" id="name" placeholder="Name" name="name" />
+          <input
+            autocomplete="off"
+            type="text"
+            id="name"
+            placeholder="Name"
+            name="name"
+          />
         </label>
         <label for="signup-email" class="signup-email-label">
           Email *
           <input
-            type="email"
             autocomplete="off"
+            type="email"
             id="signup-email"
             placeholder="Email"
             name="signupemail"
@@ -33,6 +40,7 @@
         <label for="signup-password" class="signup-password-label">
           Password *
           <input
+            autocomplete="off"
             type="password"
             id="signup-password"
             placeholder="Password"
@@ -45,6 +53,7 @@
         >
           Confirm Password *
           <input
+            autocomplete="off"
             type="password"
             id="signup-confirm-password"
             placeholder="Confirm Password"
@@ -59,8 +68,8 @@
         <label for="signin-email" class="signin-email-label">
           Email *
           <input
-            type="email"
             autocomplete="off"
+            type="email"
             id="signin-email"
             placeholder="Email"
             name="signinemail"
@@ -69,6 +78,7 @@
         <label for="signin-password" class="signin-password-label">
           Password *
           <input
+            autocomplete="off"
             type="password"
             id="signin-password"
             placeholder="Password"
@@ -82,11 +92,15 @@
         <button class="SignUpButton">Sign Up</button>
         <button class="SignInButton">Sign In</button>
       </div>
-
-
-      
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </main>
+  
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="app.js"></script>
   </body>
 </html>

@@ -10,22 +10,36 @@ let userLoggedIn = false;
 
 const signUpFormFunctionality = () => {
   SignUpButton.addEventListener("click", () => {
-    gsap.to(createAcountBtns, {
-      top: "10%",
-      duration: 0.6,
-      ease: Power1.easeInOut,
-    });
     gsap.to(signUpForm, {
-      width:"100%",
-      height:"max-content",
-      visibility: "visible",
-      opacity: "1",
-      scale: 1,
-      duration: 0.6,
-      ease: Power1.easeInOut,
+      x: 0,
+      opacity: 1,
+      duration: 0.4,
+      ease: Power3.easeInOut,
+    });
+
+    gsap.to(signInForm, {
+      x: "-150%",
+      opacity: 0,
+      duration: 0.4,
+      ease: Power3.easeInOut,
     });
   });
 
+  SignInButton.addEventListener("click", () => {
+    gsap.to(signInForm, {
+      opacity: 1,
+      x: 0,
+      duration: 0.4,
+      ease: Power3.easeInOut,
+    });
+
+    gsap.to(signUpForm, {
+      opacity: 0,
+      x: "150%",
+      duration: 0.4,
+      ease: Power3.easeInOut,
+    });
+  });
   signUpForm.addEventListener("submit", (a) => {
     a.preventDefault();
     const signUpFormData = new FormData(signUpForm);
@@ -51,11 +65,11 @@ const signUpFormFunctionality = () => {
       let signUpUserInfoSave =
         JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
 
-      let signUpUserInfoSaveCheck = signUpUserInfoSave.find(
-        (user) =>
-          user.email === signUpUserInfo.email &&
-          user.password === signUpUserInfo.password
-      );
+      let signUpUserInfoSaveCheck = signUpUserInfoSave.find((user) => {
+        user.email === signUpUserInfo.email ||
+          user.password === signUpUserInfo.password;
+        return true;
+      });
 
       if (signUpUserInfoSaveCheck) {
         console.log("User Already Exist Sign In");
@@ -70,8 +84,6 @@ const signUpFormFunctionality = () => {
         console.log("Sign Up SuccessFully");
       }
     }
-
-    //   signUpForm.reset();
   });
 
   signInForm.addEventListener("submit", (b) => {
@@ -85,11 +97,12 @@ const signUpFormFunctionality = () => {
       console.log("Fill All Field ❌");
     } else {
       let saveUser = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
-      let matchingSaveData = saveUser.find(
-        (user) =>
-          user.email === signInFormData.get("signinemail") &&
-          user.password === signInFormData.get("signinpassword")
-      );
+
+      let matchingSaveData = saveUser.find((user) => {
+        user.email === signInFormData.get("signinemail") ||
+          user.password === signInFormData.get("signinpassword");
+        return true;
+      });
 
       if (matchingSaveData) {
         userLoggedIn = true;
