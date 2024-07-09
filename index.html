@@ -3,98 +3,125 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz</title>
+    <title>Quiz Web Application</title>
+    <link rel="shortcut icon" href="favicon-1.png" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
-        <div class="account-page">
-      <form class="signup-form">
-        <h1>Sign Up</h1>
-        <label for="name" class="name-label">
-          Name *
-          <input
-            autocomplete="off"
-            type="text"
-            id="name"
-            placeholder="Name"
-            name="name"
-          />
-        </label>
-        <label for="signup-email" class="signup-email-label">
-          Email *
-          <input
-            autocomplete="off"
-            type="email"
-            id="signup-email"
-            placeholder="Email"
-            name="signupemail"
-          />
-        </label>
-        <label for="signup-password" class="signup-password-label">
-          Password *
-          <input
-            autocomplete="off"
-            type="password"
-            id="signup-password"
-            placeholder="Password"
-            name="signuppassword"
-          />
-        </label>
-        <label
-          for="signup-confirm-password"
-          class="signup-confirm-password-label"
-        >
-          Confirm Password *
-          <input
-            autocomplete="off"
-            type="password"
-            id="signup-confirm-password"
-            placeholder="Confirm Password"
-            name="signupconfirmpassword"
-          />
-        </label>
-        <button type="submit" class="signup-submit-btn">Sign_Up</button>
-      </form>
+      <div class="account-page">
+        <div class="form-alert">
+          
+          <div>
+            <i class="ri-alert-fill form-alert-icon"></i>
+            <h5 class="form-alert-text"></h5>
+          </div>
+          <i class="ri-close-large-line form-alert-close"></i>
+        </div>
 
-      <form class="signin-form">
-        <h1>Sign In</h1>
-        <label for="signin-email" class="signin-email-label">
-          Email *
-          <input
-            autocomplete="off"
-            type="email"
-            id="signin-email"
-            placeholder="Email"
-            name="signinemail"
-          />
-        </label>
-        <label for="signin-password" class="signin-password-label">
-          Password *
-          <input
-            autocomplete="off"
-            type="password"
-            id="signin-password"
-            placeholder="Password"
-            name="signinpassword"
-          />
-        </label>
-        <button type="submit" class="signin-submit-btn">Sign_In</button>
-      </form>
+        <form class="signup-form">
+          <h1>Sign Up</h1>
+          <label for="name" class="name-label">
+            Name *
+            <input type="text" id="name" placeholder="Name" name="name" />
+          </label>
+          <label for="signup-email" class="signup-email-label">
+            Email *
+            <input
+              type="email"
+              id="signup-email"
+              placeholder="Email"
+              name="signupemail"
+            />
+          </label>
+          <label for="signup-password" class="signup-password-label">
+            Password *
+            <input
+              type="password"
+              id="signup-password"
+              placeholder="Password"
+              name="signuppassword"
+            />
+          </label>
+          <label
+            for="signup-confirm-password"
+            class="signup-confirm-password-label"
+          >
+            Confirm Password *
+            <input
+              type="password"
+              id="signup-confirm-password"
+              placeholder="Confirm Password"
+              name="signupconfirmpassword"
+            />
+          </label>
+          <button type="submit" class="signup-submit-btn">Sign_Up</button>
+        </form>
 
-      <div class="account-Btns">
-        <button class="SignUpButton">Sign Up</button>
-        <button class="SignInButton">Sign In</button>
+        <form class="signin-form">
+          <h1>Sign In</h1>
+          <label for="signin-email" class="signin-email-label">
+            Email *
+            <input
+              type="email"
+              id="signin-email"
+              placeholder="Email"
+              name="signinemail"
+            />
+          </label>
+          <label for="signin-password" class="signin-password-label">
+            Password *
+            <input
+              type="password"
+              id="signin-password"
+              placeholder="Password"
+              name="signinpassword"
+            />
+          </label>
+          <button type="submit" class="signin-submit-btn">Sign_In</button>
+        </form>
+
+        <div class="account-Btns">
+          <button class="SignUpButton">Sign Up</button>
+          <button class="SignInButton">Sign In</button>
+        </div>
+
+        <!-- 
+        <div class="user-page">
+
+          <div class="user-name">Heloo User</div>
+
+          
+          <button class="start-quiz-btn">Start Quiz</button>
+          
+        </div>
+
+
+        <div class="quiz" style="display: none;">
+          
+          <h5 class="quiz-question"></h5>
+          <div class="quiz-answer-btns">
+            <button>One</button>
+            <button>Two</button>
+            <button>Three</button>
+            <button>Four</button>
+          </div>
+          <div class="quiz-question-next">Next</div>
+        </div> -->
       </div>
-    </div>
     </main>
-  
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
       integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
