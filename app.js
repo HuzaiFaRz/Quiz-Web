@@ -7,12 +7,20 @@ const formAlert = document.querySelector(".form-alert");
 const formAlertText = document.querySelector(".form-alert-text");
 const formAlertCloseBtn = document.querySelector(".form-alert-close");
 const formAlertIcon = document.querySelector(".form-alert-icon");
+const userPage = document.querySelector(".user-page");
+const userName = document.querySelector(".user-name");
+const confirmEmailLabel = document.querySelector(".confirm-email-label");
+const confirmEmail = document.querySelector("#confirm-email");
+const logOutbtn = document.querySelector(".logout-btn");
+const deleteAccountBtn = document.querySelector(".deleteaccount-btn");
+const quizStartBtn = document.querySelector(".start-quiz-btn");
 let userSignedUp = false;
 let userLoggedIn = false;
 
 const formAlertVisible = () => {
   gsap.to(formAlert, {
     top: 0,
+    backgroundColor: "rgb(255, 0, 0, 0.8)",
     duration: 0.6,
     ease: Power3.easeInOut,
   });
@@ -21,7 +29,7 @@ const formAlertVisible = () => {
 const formAlertVisibleSuccess = () => {
   gsap.to(formAlert, {
     top: 0,
-    backgroundColor: "rgb(0, 128, 0, 0.7)",
+    backgroundColor: "rgb(0, 128, 0, 0.8)",
     duration: 0.6,
     ease: Power3.easeInOut,
   });
@@ -34,6 +42,7 @@ const formAlertUnVisible = () => {
     ease: Power3.easeInOut,
   });
 };
+
 const formAlertUnVisibleautomatic = () => {
   setTimeout(() => {
     gsap.to(formAlert, {
@@ -44,7 +53,7 @@ const formAlertUnVisibleautomatic = () => {
   }, 3000);
 };
 
-const signUpFormFunctionality = () => {
+const createAccount = () => {
   SignUpButton.addEventListener("click", () => {
     gsap.to(signUpForm, {
       x: 0,
@@ -110,9 +119,9 @@ const signUpFormFunctionality = () => {
       let signUpUserInfoSave =
         JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
 
-      let signUpUserInfoSaveCheck = signUpUserInfoSave.find((user) => {
-        return user.email === signUpUserInfo.email;
-      });
+      let signUpUserInfoSaveCheck = signUpUserInfoSave.find(
+        (user) => user.email === signUpUserInfo.email
+      );
 
       if (signUpUserInfoSaveCheck) {
         formAlertVisible();
@@ -154,9 +163,11 @@ const signUpFormFunctionality = () => {
     } else {
       let saveUser = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
 
-      let matchingSaveData = saveUser.find((user) => {
-        return user.email === signInFormData.get("signinemail");
-      });
+      let matchingSaveData = saveUser.find(
+        (user) =>
+          user.email === signInFormData.get("signinemail") &&
+          user.password === signInFormData.get("signinpassword")
+      );
 
       if (matchingSaveData) {
         userLoggedIn = true;
@@ -178,6 +189,27 @@ const signUpFormFunctionality = () => {
       }
     }
   });
+
+  deleteAccountBtn.addEventListener("click", () => {
+    gsap.to(confirmEmailLabel, {
+      x: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: Power3.easeInOut,
+    });
+    let userCheck = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
+    let userFind = userCheck.find((user) => user.email === confirmEmail.value);
+
+    if (userFind) {
+      console.log(userFind);
+    } else {
+      formAlertVisible();
+      formAlertUnVisibleautomatic();
+      formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+      formAlertText.textContent = " Wrong Email";
+    }
+
+    // console.log(this);
+  });
 };
-signUpFormFunctionality();
-console.log();
+createAccount();
