@@ -363,10 +363,10 @@ main::before {
   align-items: center;
 }
 
-/* .confirm-email-label {
+.confirm-email-label {
   opacity: .5;
   transform: translateX(-200%);
-} */
+}
 
 
 .user-name {

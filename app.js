@@ -189,27 +189,61 @@ const createAccount = () => {
       }
     }
   });
+  let userCheck = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
 
-  deleteAccountBtn.addEventListener("click", () => {
-    gsap.to(confirmEmailLabel, {
-      x: 0,
-      opacity: 1,
-      duration: 0.6,
-      ease: Power3.easeInOut,
-    });
-    let userCheck = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
-    let userFind = userCheck.find((user) => user.email === confirmEmail.value);
+  let userNameFind = userCheck.find((user) => user.name);
+  userName.textContent = `Helloo ${userNameFind}`;
 
-    if (userFind) {
-      console.log(userFind);
-    } else {
-      formAlertVisible();
-      formAlertUnVisibleautomatic();
-      formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
-      formAlertText.textContent = " Wrong Email";
+  let deleteAccountBtnCount = 0;
+
+  deleteAccountBtn.addEventListener("click", (e) => {
+    deleteAccountBtnCount++;
+    if (deleteAccountBtnCount === 1) {
+      gsap.to(confirmEmailLabel, {
+        x: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: Power3.easeInOut,
+      });
     }
+    if (deleteAccountBtnCount >= 2) {
+      let userFind = userCheck.find(
+        (user) => user.email === confirmEmail.value
+      );
 
-    // console.log(this);
+      if (confirmEmail.value === "") {
+        formAlertVisible();
+        formAlertUnVisibleautomatic();
+        formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+        formAlertText.textContent = " Fill Field";
+      } else {
+        if (userFind) {
+          userCheck = userCheck.filter((e) => e.email != confirmEmail.value);
+          localStorage.setItem("signUpUserInfo", JSON.stringify(userCheck));
+          formAlertVisibleSuccess();
+          formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+          formAlertText.textContent = " Remove Account SuccessFully";
+          gsap.to(confirmEmailLabel, {
+            x: "-200%",
+            opacity: 0,
+            duration: 0.6,
+            ease: Power3.easeInOut,
+          });
+          deleteAccountBtnCount = 0;
+        } else {
+          formAlertVisible();
+          formAlertUnVisibleautomatic();
+          formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+          formAlertText.textContent = " Wrong Email";
+          confirmEmail.value = "";
+        }
+      }
+    }
+    console.log(deleteAccountBtnCount);
+  });
+
+  logOutbtn.addEventListener("click", () => {
+    location.reload();
   });
 };
 createAccount();
