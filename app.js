@@ -216,9 +216,7 @@ let quizQuestions = [
 let quizQuestionIndex = 0;
 let quizAnswerIndex = 0;
 
-quizQuestionText.textContent = `Q${quizQuestionIndex}. ${
-  quizQuestions[quizQuestionIndex].question
-}`;
+quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
 Array.from(quizAnswerBtn).forEach(() => {
   quizAnswerBtn[0].textContent =
     quizQuestions[quizAnswerIndex].answers[0].answer;
@@ -239,9 +237,7 @@ quizQueationNextBtn.addEventListener("click", () => {
   quizQuestionIndex = quizQuestionIndex + 1;
   quizAnswerIndex = quizAnswerIndex + 1;
 
-  quizQuestionText.textContent = `Q${quizQuestionIndex}. ${
-    quizQuestions[quizQuestionIndex].question
-  }`;
+  quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
 
   Array.from(quizAnswerBtn).forEach(() => {
     quizAnswerBtn[0].textContent =
