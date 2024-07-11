@@ -15,9 +15,13 @@ const logOutbtn = document.querySelector(".logout-btn");
 const deleteAccountBtn = document.querySelector(".deleteaccount-btn");
 const quizStartBtn = document.querySelector(".start-quiz-btn");
 const quizDiv = document.querySelector(".quiz");
+const quizBody = document.querySelector(".quiz-body");
 const quizQuestionText = document.querySelector(".quiz-question");
 const quizAnswerBtn = document.querySelectorAll(".quiz-answer-btn");
-const quizQueationNextBtn = document.querySelector(".quiz-question-next");
+const quizQuestionNextBtn = document.querySelector(".quiz-question-next");
+const quizTimer = document.querySelector(".quiz-timer");
+const correctAnswerDiv = document.querySelector(".correctanswer");
+const incorrectAnswerDiv = document.querySelector(".incorrectanswer");
 
 let userSignedUp = false;
 let userLoggedIn = false;
@@ -32,6 +36,17 @@ let quizQuestions = [
       { answer: "Peshawar", correct: false },
     ],
   },
+  {
+    question:
+      "Which mountain is the second highest peak in Pakistan and the world?",
+    answers: [
+      { answer: "Mount Everest", correct: false },
+      { answer: "K2", correct: true },
+      { answer: "Mount McKinley", correct: false },
+      { answer: "Mount Kilimanjaro", correct: false },
+    ],
+  },
+
   {
     question: "Which mountain range is located in Pakistan?",
     answers: [
@@ -59,213 +74,245 @@ let quizQuestions = [
       { answer: "Ravi River", correct: false },
     ],
   },
-  {
-    question: "What is the national sport of Pakistan?",
-    answers: [
-      { answer: "Cricket", correct: true },
-      { answer: "Hockey", correct: false },
-      { answer: "Football", correct: false },
-      { answer: "Polo", correct: false },
-    ],
-  },
-  {
-    question: "Which city is known as the 'City of Lights' in Pakistan?",
-    answers: [
-      { answer: "Karachi", correct: true },
-      { answer: "Lahore", correct: false },
-      { answer: "Islamabad", correct: false },
-      { answer: "Faisalabad", correct: false },
-    ],
-  },
-  {
-    question: "In which year did Pakistan gain independence?",
-    answers: [
-      { answer: "1945", correct: false },
-      { answer: "1947", correct: true },
-      { answer: "1950", correct: false },
-      { answer: "1960", correct: false },
-    ],
-  },
-  {
-    question:
-      "Which Pakistani physicist is known as the 'Father of Pakistan's Nuclear Program'?",
-    answers: [
-      { answer: "Abdul Qadeer Khan", correct: true },
-      { answer: "Pervez Hoodbhoy", correct: false },
-      { answer: "Salam Abdus", correct: false },
-      { answer: "Ziauddin Sardar", correct: false },
-    ],
-  },
-  {
-    question: "What is the largest city in Pakistan by population?",
-    answers: [
-      { answer: "Lahore", correct: false },
-      { answer: "Karachi", correct: true },
-      { answer: "Islamabad", correct: false },
-      { answer: "Faisalabad", correct: false },
-    ],
-  },
-  {
-    question:
-      "Which Pakistani cricketer has scored the most centuries in Test cricket?",
-    answers: [
-      { answer: "Wasim Akram", correct: false },
-      { answer: "Inzamam-ul-Haq", correct: false },
-      { answer: "Younis Khan", correct: true },
-      { answer: "Shahid Afridi", correct: false },
-    ],
-  },
-  {
-    question:
-      "Which famous archaeological site is located in Pakistan and is known for its ancient civilization?",
-    answers: [
-      { answer: "Mohenjo-daro", correct: true },
-      { answer: "Harappa", correct: false },
-      { answer: "Taxila", correct: false },
-      { answer: "Chanhudaro", correct: false },
-    ],
-  },
-  {
-    question: "What is the national flower of Pakistan?",
-    answers: [
-      { answer: "Jasmine", correct: true },
-      { answer: "Rose", correct: false },
-      { answer: "Lily", correct: false },
-      { answer: "Sunflower", correct: false },
-    ],
-  },
-  {
-    question: "Who is the current Prime Minister of Pakistan (as of 2024)?",
-    answers: [
-      { answer: "Imran Khan", correct: true },
-      { answer: "Nawaz Sharif", correct: false },
-      { answer: "Asif Ali Zardari", correct: false },
-      { answer: "Bilawal Bhutto Zardari", correct: false },
-    ],
-  },
-  {
-    question:
-      "Which Pakistani actress won an Oscar for her role in the movie 'A Girl in the River'?",
-    answers: [
-      { answer: "Mahira Khan", correct: false },
-      { answer: "Saba Qamar", correct: false },
-      { answer: "Mehwish Hayat", correct: false },
-      { answer: "Sharmeen Obaid-Chinoy", correct: true },
-    ],
-  },
-  {
-    question: "Which famous Pakistani musician was known as the 'King of Pop'?",
-    answers: [
-      { answer: "Ali Zafar", correct: false },
-      { answer: "Atif Aslam", correct: false },
-      { answer: "Nusrat Fateh Ali Khan", correct: true },
-      { answer: "Rahat Fateh Ali Khan", correct: false },
-    ],
-  },
-  {
-    question:
-      "Which animal is associated with the national identity of Pakistan?",
-    answers: [
-      { answer: "Lion", correct: false },
-      { answer: "Markhor", correct: true },
-      { answer: "Tiger", correct: false },
-      { answer: "Leopard", correct: false },
-    ],
-  },
-  {
-    question:
-      "Which Pakistani city is known for its ancient Buddhist heritage and Gandhara art?",
-    answers: [
-      { answer: "Peshawar", correct: false },
-      { answer: "Quetta", correct: false },
-      { answer: "Lahore", correct: false },
-      { answer: "Taxila", correct: true },
-    ],
-  },
-  {
-    question: "Who was the first female Prime Minister of Pakistan?",
-    answers: [
-      { answer: "Fatima Jinnah", correct: false },
-      { answer: "Benazir Bhutto", correct: true },
-      { answer: "Asma Jahangir", correct: false },
-      { answer: "Hina Rabbani Khar", correct: false },
-    ],
-  },
-  {
-    question:
-      "Which Pakistani cricketer has the record for the most wickets in Test cricket?",
-    answers: [
-      { answer: "Wasim Akram", correct: false },
-      { answer: "Imran Khan", correct: false },
-      { answer: "Shoaib Akhtar", correct: false },
-      { answer: "Waqar Younis", correct: true },
-    ],
-  },
-  {
-    question:
-      "Which Pakistani artist painted the famous mural on the Pakistan Monument in Islamabad?",
-    answers: [
-      { answer: "Sadequain", correct: true },
-      { answer: "Abdur Rahman Chughtai", correct: false },
-      { answer: "Jamil Naqsh", correct: false },
-      { answer: "Anwar Maqsood", correct: false },
-    ],
-  },
+
+  // {
+  //   question: "What is the national sport of Pakistan?",
+  //   answers: [
+  //     { answer: "Cricket", correct: true },
+  //     { answer: "Hockey", correct: false },
+  //     { answer: "Football", correct: false },
+  //     { answer: "Polo", correct: false },
+  //   ],
+  // },
+  // {
+  //   question: "Which city is known as the 'City of Lights' in Pakistan?",
+  //   answers: [
+  //     { answer: "Karachi", correct: true },
+  //     { answer: "Lahore", correct: false },
+  //     { answer: "Islamabad", correct: false },
+  //     { answer: "Faisalabad", correct: false },
+  //   ],
+  // },
+  // {
+  //   question: "In which year did Pakistan gain independence?",
+  //   answers: [
+  //     { answer: "1945", correct: false },
+  //     { answer: "1947", correct: true },
+  //     { answer: "1950", correct: false },
+  //     { answer: "1960", correct: false },
+  //   ],
+  // },
+  // {
+  //   question:
+  //     "Which Pakistani physicist is known as the 'Father of Pakistan's Nuclear Program'?",
+  //   answers: [
+  //     { answer: "Abdul Qadeer Khan", correct: true },
+  //     { answer: "Pervez Hoodbhoy", correct: false },
+  //     { answer: "Salam Abdus", correct: false },
+  //     { answer: "Ziauddin Sardar", correct: false },
+  //   ],
+  // },
+  // {
+  //   question: "What is the largest city in Pakistan by population?",
+  //   answers: [
+  //     { answer: "Lahore", correct: false },
+  //     { answer: "Karachi", correct: true },
+  //     { answer: "Islamabad", correct: false },
+  //     { answer: "Faisalabad", correct: false },
+  //   ],
+  // },
+  // {
+  //   question:
+  //     "Which Pakistani cricketer has scored the most centuries in Test cricket?",
+  //   answers: [
+  //     { answer: "Wasim Akram", correct: false },
+  //     { answer: "Inzamam-ul-Haq", correct: false },
+  //     { answer: "Younis Khan", correct: true },
+  //     { answer: "Shahid Afridi", correct: false },
+  //   ],
+  // },
+  // {
+  //   question:
+  //     "Which famous archaeological site is located in Pakistan and is known for its ancient civilization?",
+  //   answers: [
+  //     { answer: "Mohenjo-daro", correct: true },
+  //     { answer: "Harappa", correct: false },
+  //     { answer: "Taxila", correct: false },
+  //     { answer: "Chanhudaro", correct: false },
+  //   ],
+  // },
+  // {
+  //   question: "What is the national flower of Pakistan?",
+  //   answers: [
+  //     { answer: "Jasmine", correct: true },
+  //     { answer: "Rose", correct: false },
+  //     { answer: "Lily", correct: false },
+  //     { answer: "Sunflower", correct: false },
+  //   ],
+  // },
+  // {
+  //   question: "Who is the current Prime Minister of Pakistan (as of 2024)?",
+  //   answers: [
+  //     { answer: "Imran Khan", correct: true },
+  //     { answer: "Nawaz Sharif", correct: false },
+  //     { answer: "Asif Ali Zardari", correct: false },
+  //     { answer: "Bilawal Bhutto Zardari", correct: false },
+  //   ],
+  // },
+  // {
+  //   question:
+  //     "Which Pakistani actress won an Oscar for her role in the movie 'A Girl in the River'?",
+  //   answers: [
+  //     { answer: "Mahira Khan", correct: false },
+  //     { answer: "Saba Qamar", correct: false },
+  //     { answer: "Mehwish Hayat", correct: false },
+  //     { answer: "Sharmeen Obaid-Chinoy", correct: true },
+  //   ],
+  // },
+  // {
+  //   question: "Which famous Pakistani musician was known as the 'King of Pop'?",
+  //   answers: [
+  //     { answer: "Ali Zafar", correct: false },
+  //     { answer: "Atif Aslam", correct: false },
+  //     { answer: "Nusrat Fateh Ali Khan", correct: true },
+  //     { answer: "Rahat Fateh Ali Khan", correct: false },
+  //   ],
+  // },
+  // {
+  //   question:
+  //     "Which animal is associated with the national identity of Pakistan?",
+  //   answers: [
+  //     { answer: "Lion", correct: false },
+  //     { answer: "Markhor", correct: true },
+  //     { answer: "Tiger", correct: false },
+  //     { answer: "Leopard", correct: false },
+  //   ],
+  // },
+  // {
+  //   question:
+  //     "Which Pakistani city is known for its ancient Buddhist heritage and Gandhara art?",
+  //   answers: [
+  //     { answer: "Peshawar", correct: false },
+  //     { answer: "Quetta", correct: false },
+  //     { answer: "Lahore", correct: false },
+  //     { answer: "Taxila", correct: true },
+  //   ],
+  // },
+  // {
+  //   question: "Who was the first female Prime Minister of Pakistan?",
+  //   answers: [
+  //     { answer: "Fatima Jinnah", correct: false },
+  //     { answer: "Benazir Bhutto", correct: true },
+  //     { answer: "Asma Jahangir", correct: false },
+  //     { answer: "Hina Rabbani Khar", correct: false },
+  //   ],
+  // },
+  // {
+  //   question:
+  //     "Which Pakistani cricketer has the record for the most wickets in Test cricket?",
+  //   answers: [
+  //     { answer: "Wasim Akram", correct: false },
+  //     { answer: "Imran Khan", correct: false },
+  //     { answer: "Shoaib Akhtar", correct: false },
+  //     { answer: "Waqar Younis", correct: true },
+  //   ],
+  // },
+  // {
+  //   question:
+  //     "Which Pakistani artist painted the famous mural on the Pakistan Monument in Islamabad?",
+  //   answers: [
+  //     { answer: "Sadequain", correct: true },
+  //     { answer: "Abdur Rahman Chughtai", correct: false },
+  //     { answer: "Jamil Naqsh", correct: false },
+  //     { answer: "Anwar Maqsood", correct: false },
+  //   ],
+  // },
 ];
 
-let quizQuestionIndex = 0;
-let quizAnswerIndex = 0;
+let quizQuestionIndex = 1;
+let quizAnswerIndex = 1;
+let correctanswer = 0;
+let incorrectanswer = 0;
+correctAnswerDiv.textContent = `Correct: ${correctanswer}`;
+incorrectAnswerDiv.textContent = `InCorrect: ${incorrectanswer}`;
 
 quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
-Array.from(quizAnswerBtn).forEach(() => {
-  quizAnswerBtn[0].textContent =
-    quizQuestions[quizAnswerIndex].answers[0].answer;
 
-  quizAnswerBtn[1].textContent =
-    quizQuestions[quizAnswerIndex].answers[1].answer;
+Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
+  quizAnswerBtnElem.textContent =
+    quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
 
-  quizAnswerBtn[2].textContent =
-    quizQuestions[quizAnswerIndex].answers[2].answer;
+  quizAnswerBtnElem.style.backgroundColor = "rgb(0, 0, 0, 0.9)";
 
-  quizAnswerBtn[3].textContent =
-    quizQuestions[quizAnswerIndex].answers[3].answer;
-});
+  quizAnswerBtnElem.addEventListener("click", (e) => {
+    setTimeout(() => {
+      quizQuestionAutomaticChange();
+    }, 1500);
 
-console.log(quizQuestions[quizQuestionIndex].question);
+    quizAnswerBtn.forEach((btn, index) => {
+      if (quizQuestions[quizAnswerIndex].answers[index].correct) {
+        btn.style.backgroundColor = "rgb(0, 128, 0, 0.5)";
 
-quizQueationNextBtn.addEventListener("click", () => {
-  quizQuestionIndex = quizQuestionIndex + 1;
-  quizAnswerIndex = quizAnswerIndex + 1;
-
-  quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
-
-  Array.from(quizAnswerBtn).forEach(() => {
-    quizAnswerBtn[0].textContent =
-      quizQuestions[quizAnswerIndex].answers[0].answer;
-
-    quizAnswerBtn[1].textContent =
-      quizQuestions[quizAnswerIndex].answers[1].answer;
-
-    quizAnswerBtn[2].textContent =
-      quizQuestions[quizAnswerIndex].answers[2].answer;
-
-    quizAnswerBtn[3].textContent =
-      quizQuestions[quizAnswerIndex].answers[3].answer;
+        if (
+          e.target.textContent ===
+          quizQuestions[quizAnswerIndex].answers[index].answer
+        ) {
+          correctanswer++;
+          console.log(correctanswer);
+        }
+      } else {
+        btn.style.backgroundColor = "rgb(255, 0, 0, 0.5)";
+      }
+    });
   });
+});
 
-  if (quizQuestionIndex === 20) {
+const quizQuestionAutomaticChange = () => {
+  quizQuestionIndex++;
+  quizAnswerIndex++;
+  if (
+    quizQuestionIndex >= quizQuestions.length &&
+    quizAnswerIndex >= quizQuestions.length
+  ) {
+    formAlertVisibleSuccess();
+    formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+    formAlertIconChanger();
+    formAlertText.textContent = " Quiz Complete";
     quizQuestionIndex = 0;
+    quizAnswerIndex = 0;
+    gsap.to(quizBody, {
+      opacity: 0,
+      duration: 0.5,
+      ease: Power3.easeInOut,
+    });
   }
-});
+  quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
+  Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
+    quizAnswerBtnElem.textContent =
+      quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
+    quizAnswerBtnElem.style.backgroundColor = "rgb(0, 0, 0, 0.9)";
+    quizAnswerBtnElem.addEventListener("click", (e) => {
+      quizAnswerBtn.forEach((btn, index) => {
+        if (quizQuestions[quizAnswerIndex].answers[index].correct) {
+          btn.style.backgroundColor = "rgb(0, 128, 0, 0.5)";
+          if (
+            e.target.textContent ===
+            quizQuestions[quizAnswerIndex].answers[index].answer
+          ) {
+            correctanswer++;
+            console.log(correctanswer);
+          }
+        } else {
+          btn.style.backgroundColor = "rgb(255, 0, 0, 0.5)";
+        }
+      });
+    });
+  });
+};
 
-quizQuestions.forEach((a) => {
-  a.answers.forEach((b) => {});
+quizQuestionNextBtn.addEventListener("click", () => {
+  quizQuestionAutomaticChange();
 });
-
-// quizAnswerBtn.forEach((quizAnswerBtnElem) => {
-//   quizAnswerBtnElem.textContent =
-//
-// });
 
 const formAlertVisible = () => {
   gsap.to(formAlert, {
@@ -301,6 +348,10 @@ const formAlertUnVisibleautomatic = () => {
       ease: Power3.easeInOut,
     });
   }, 3000);
+};
+
+const formAlertIconChanger = () => {
+  formAlertIcon.classList.replace("ri-alert-fill", "ri-check-double-fill");
 };
 
 const createAccount = () => {
@@ -390,10 +441,7 @@ const createAccount = () => {
         formAlertVisibleSuccess();
         formAlertUnVisibleautomatic();
         formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
-        formAlertIcon.classList.replace(
-          "ri-alert-fill",
-          "ri-check-double-fill"
-        );
+        formAlertIconChanger();
         formAlertText.textContent = " Sign Up SuccessFully";
       }
     }
@@ -425,10 +473,7 @@ const createAccount = () => {
         formAlertVisibleSuccess();
         formAlertUnVisibleautomatic();
         formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
-        formAlertIcon.classList.replace(
-          "ri-alert-fill",
-          "ri-check-double-fill"
-        );
+        formAlertIconChanger();
         formAlertText.textContent = " Sign in SuccessFully";
       } else {
         signUpForm.reset();
@@ -472,6 +517,7 @@ const createAccount = () => {
           localStorage.setItem("signUpUserInfo", JSON.stringify(userCheck));
           formAlertVisibleSuccess();
           formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+          formAlertIconChanger();
           formAlertText.textContent = " Remove Account SuccessFully";
           gsap.to(confirmEmailLabel, {
             x: "-200%",
