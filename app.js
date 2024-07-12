@@ -63,7 +63,7 @@ const formAlertUnVisibleautomatic = () => {
       duration: 0.6,
       ease: Power3.easeInOut,
     });
-  }, 3000);
+  }, 2000);
 };
 
 const formAlertIconChanger = () => {
@@ -519,6 +519,9 @@ const quizQuestionUpdate = () => {
 
 quizStartBtn.addEventListener("click", () => {
   startQuiz();
+  userPageUnvisible();
+  quizDivVisible();
+  quizBodyVisible();
 });
 quizQuestionNextBtn.addEventListener("click", () => {
   quizQuestionUpdate();
