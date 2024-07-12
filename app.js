@@ -22,10 +22,14 @@ const quizQuestionNextBtn = document.querySelector(".quiz-question-next");
 const quizTimer = document.querySelector(".quiz-timer");
 const quizHeader = document.querySelector(".quiz-header");
 const correctAnswerDiv = document.querySelector(".correctanswer");
-const incorrectAnswerDiv = document.querySelector(".incorrectanswer");
-
 let userSignedUp = false;
 let userLoggedIn = false;
+let quizQuestionIndex = 1;
+let quizAnswerIndex = 1;
+let correctAnswer = 0;
+let timerMint = 10;
+let timerSecond = 0;
+let quizTimerSet;
 const formAlertVisible = () => {
   gsap.to(formAlert, {
     top: 0,
@@ -68,20 +72,23 @@ const formAlertIconChanger = () => {
 
 const quizBodyUnVisible = () => {
   gsap.to(quizBody, {
+    display: "none",
     opacity: 0,
-    duration: 0.5,
-    ease: Power3.easeInOut,
-  });
-};
-const quizBodyVisible = () => {
-  gsap.to(quizBody, {
-    opacity: 1,
-    duration: 0.5,
+    duration: 0.1,
     ease: Power3.easeInOut,
   });
 };
 
-const incorrectAnswerVisible = () => {
+const quizBodyVisible = () => {
+  gsap.to(quizBody, {
+    display: "flex",
+    opacity: 1,
+    duration: 0.1,
+    ease: Power3.easeInOut,
+  });
+};
+
+const correctAnswerVisible = () => {
   gsap.to(correctAnswerDiv, {
     opacity: 1,
     duration: 0.5,
@@ -89,13 +96,6 @@ const incorrectAnswerVisible = () => {
   });
 };
 
-const correctAnswerVisible = () => {
-  gsap.to(incorrectAnswerDiv, {
-    opacity: 1,
-    duration: 0.5,
-    ease: Power3.easeInOut,
-  });
-};
 const quizHeaderTopMove = () => {
   gsap.to(quizHeader, {
     y: "100%",
@@ -103,6 +103,103 @@ const quizHeaderTopMove = () => {
     ease: Power3.easeInOut,
   });
 };
+const signUpFormVisible = () => {
+  gsap.to(signUpForm, {
+    x: 0,
+    visibility: "visible",
+    opacity: 1,
+    duration: 0.4,
+    ease: Power3.easeInOut,
+  });
+};
+const signUpFormUnVisible = () => {
+  gsap.to(signUpForm, {
+    opacity: 0,
+    visibility: "hidden",
+    x: "150%",
+    duration: 0.4,
+    ease: Power3.easeInOut,
+  });
+};
+
+const signInFormVisible = () => {
+  gsap.to(signInForm, {
+    opacity: 1,
+    visibility: "visible",
+    x: 0,
+    duration: 0.4,
+    ease: Power3.easeInOut,
+  });
+};
+const signInFormUnVisible = () => {
+  gsap.to(signInForm, {
+    visibility: "hidden",
+    x: "-150%",
+    opacity: 0,
+    duration: 0.4,
+    ease: Power3.easeInOut,
+  });
+};
+
+const createAcountBtnsvisible = () => {
+  gsap.to(createAcountBtns, {
+    zIndex: 1,
+    x: 0,
+    visibility: "visible",
+    opacity: 1,
+    duration: 0.4,
+    ease: Power3.easeInOut,
+  });
+};
+
+const createAcountBtnsUnvisible = () => {
+  gsap.to(createAcountBtns, {
+    zIndex: 0,
+    visibility: "hidden",
+    x: "-200%",
+    opacity: 0,
+    duration: 0.4,
+    ease: Power3.easeInOut,
+  });
+};
+
+const quizDivVisible = () => {
+  gsap.to(quizDiv, {
+    display: "flex",
+    opacity: 1,
+    duration: 0.4,
+    ease: Power3.easeInOut,
+  });
+};
+
+const quizDivUnvisible = () => {
+  gsap.to(quizDiv, {
+    display: "none",
+    opacity: 0,
+    duration: 0.4,
+    ease: Power3.easeInOut,
+  });
+};
+
+const userPageVisible = () => {
+  gsap.to(userPage, {
+    display: "flex",
+    opacity: 1,
+    duration: 0.3,
+    ease: Power3.easeInOut,
+  });
+};
+const userPageUnvisible = () => {
+  gsap.to(userPage, {
+    display: "none",
+    opacity: 0,
+    duration: 0.3,
+    ease: Power3.easeInOut,
+  });
+};
+
+userPageUnvisible();
+quizDivUnvisible();
 
 let quizQuestions = [
   {
@@ -153,310 +250,458 @@ let quizQuestions = [
     ],
   },
 
-  // {
-  //   question: "What is the national sport of Pakistan?",
-  //   answers: [
-  //     { answer: "Cricket", correct: true },
-  //     { answer: "Hockey", correct: false },
-  //     { answer: "Football", correct: false },
-  //     { answer: "Polo", correct: false },
-  //   ],
-  // },
-  // {
-  //   question: "Which city is known as the 'City of Lights' in Pakistan?",
-  //   answers: [
-  //     { answer: "Karachi", correct: true },
-  //     { answer: "Lahore", correct: false },
-  //     { answer: "Islamabad", correct: false },
-  //     { answer: "Faisalabad", correct: false },
-  //   ],
-  // },
-  // {
-  //   question: "In which year did Pakistan gain independence?",
-  //   answers: [
-  //     { answer: "1945", correct: false },
-  //     { answer: "1947", correct: true },
-  //     { answer: "1950", correct: false },
-  //     { answer: "1960", correct: false },
-  //   ],
-  // },
-  // {
-  //   question:
-  //     "Which Pakistani physicist is known as the 'Father of Pakistan's Nuclear Program'?",
-  //   answers: [
-  //     { answer: "Abdul Qadeer Khan", correct: true },
-  //     { answer: "Pervez Hoodbhoy", correct: false },
-  //     { answer: "Salam Abdus", correct: false },
-  //     { answer: "Ziauddin Sardar", correct: false },
-  //   ],
-  // },
-  // {
-  //   question: "What is the largest city in Pakistan by population?",
-  //   answers: [
-  //     { answer: "Lahore", correct: false },
-  //     { answer: "Karachi", correct: true },
-  //     { answer: "Islamabad", correct: false },
-  //     { answer: "Faisalabad", correct: false },
-  //   ],
-  // },
-  // {
-  //   question:
-  //     "Which Pakistani cricketer has scored the most centuries in Test cricket?",
-  //   answers: [
-  //     { answer: "Wasim Akram", correct: false },
-  //     { answer: "Inzamam-ul-Haq", correct: false },
-  //     { answer: "Younis Khan", correct: true },
-  //     { answer: "Shahid Afridi", correct: false },
-  //   ],
-  // },
-  // {
-  //   question:
-  //     "Which famous archaeological site is located in Pakistan and is known for its ancient civilization?",
-  //   answers: [
-  //     { answer: "Mohenjo-daro", correct: true },
-  //     { answer: "Harappa", correct: false },
-  //     { answer: "Taxila", correct: false },
-  //     { answer: "Chanhudaro", correct: false },
-  //   ],
-  // },
-  // {
-  //   question: "What is the national flower of Pakistan?",
-  //   answers: [
-  //     { answer: "Jasmine", correct: true },
-  //     { answer: "Rose", correct: false },
-  //     { answer: "Lily", correct: false },
-  //     { answer: "Sunflower", correct: false },
-  //   ],
-  // },
-  // {
-  //   question: "Who is the current Prime Minister of Pakistan (as of 2024)?",
-  //   answers: [
-  //     { answer: "Imran Khan", correct: true },
-  //     { answer: "Nawaz Sharif", correct: false },
-  //     { answer: "Asif Ali Zardari", correct: false },
-  //     { answer: "Bilawal Bhutto Zardari", correct: false },
-  //   ],
-  // },
-  // {
-  //   question:
-  //     "Which Pakistani actress won an Oscar for her role in the movie 'A Girl in the River'?",
-  //   answers: [
-  //     { answer: "Mahira Khan", correct: false },
-  //     { answer: "Saba Qamar", correct: false },
-  //     { answer: "Mehwish Hayat", correct: false },
-  //     { answer: "Sharmeen Obaid-Chinoy", correct: true },
-  //   ],
-  // },
-  // {
-  //   question: "Which famous Pakistani musician was known as the 'King of Pop'?",
-  //   answers: [
-  //     { answer: "Ali Zafar", correct: false },
-  //     { answer: "Atif Aslam", correct: false },
-  //     { answer: "Nusrat Fateh Ali Khan", correct: true },
-  //     { answer: "Rahat Fateh Ali Khan", correct: false },
-  //   ],
-  // },
-  // {
-  //   question:
-  //     "Which animal is associated with the national identity of Pakistan?",
-  //   answers: [
-  //     { answer: "Lion", correct: false },
-  //     { answer: "Markhor", correct: true },
-  //     { answer: "Tiger", correct: false },
-  //     { answer: "Leopard", correct: false },
-  //   ],
-  // },
-  // {
-  //   question:
-  //     "Which Pakistani city is known for its ancient Buddhist heritage and Gandhara art?",
-  //   answers: [
-  //     { answer: "Peshawar", correct: false },
-  //     { answer: "Quetta", correct: false },
-  //     { answer: "Lahore", correct: false },
-  //     { answer: "Taxila", correct: true },
-  //   ],
-  // },
-  // {
-  //   question: "Who was the first female Prime Minister of Pakistan?",
-  //   answers: [
-  //     { answer: "Fatima Jinnah", correct: false },
-  //     { answer: "Benazir Bhutto", correct: true },
-  //     { answer: "Asma Jahangir", correct: false },
-  //     { answer: "Hina Rabbani Khar", correct: false },
-  //   ],
-  // },
-  // {
-  //   question:
-  //     "Which Pakistani cricketer has the record for the most wickets in Test cricket?",
-  //   answers: [
-  //     { answer: "Wasim Akram", correct: false },
-  //     { answer: "Imran Khan", correct: false },
-  //     { answer: "Shoaib Akhtar", correct: false },
-  //     { answer: "Waqar Younis", correct: true },
-  //   ],
-  // },
-  // {
-  //   question:
-  //     "Which Pakistani artist painted the famous mural on the Pakistan Monument in Islamabad?",
-  //   answers: [
-  //     { answer: "Sadequain", correct: true },
-  //     { answer: "Abdur Rahman Chughtai", correct: false },
-  //     { answer: "Jamil Naqsh", correct: false },
-  //     { answer: "Anwar Maqsood", correct: false },
-  //   ],
-  // },
+  {
+    question: "What is the national sport of Pakistan?",
+    answers: [
+      { answer: "Cricket", correct: true },
+      { answer: "Hockey", correct: false },
+      { answer: "Football", correct: false },
+      { answer: "Polo", correct: false },
+    ],
+  },
+  {
+    question: "Which city is known as the 'City of Lights' in Pakistan?",
+    answers: [
+      { answer: "Karachi", correct: true },
+      { answer: "Lahore", correct: false },
+      { answer: "Islamabad", correct: false },
+      { answer: "Faisalabad", correct: false },
+    ],
+  },
+  {
+    question: "In which year did Pakistan gain independence?",
+    answers: [
+      { answer: "1945", correct: false },
+      { answer: "1947", correct: true },
+      { answer: "1950", correct: false },
+      { answer: "1960", correct: false },
+    ],
+  },
+  {
+    question:
+      "Which Pakistani physicist is known as the 'Father of Pakistan's Nuclear Program'?",
+    answers: [
+      { answer: "Abdul Qadeer Khan", correct: true },
+      { answer: "Pervez Hoodbhoy", correct: false },
+      { answer: "Salam Abdus", correct: false },
+      { answer: "Ziauddin Sardar", correct: false },
+    ],
+  },
+  {
+    question: "What is the largest city in Pakistan by population?",
+    answers: [
+      { answer: "Lahore", correct: false },
+      { answer: "Karachi", correct: true },
+      { answer: "Islamabad", correct: false },
+      { answer: "Faisalabad", correct: false },
+    ],
+  },
+  {
+    question:
+      "Which Pakistani cricketer has scored the most centuries in Test cricket?",
+    answers: [
+      { answer: "Wasim Akram", correct: false },
+      { answer: "Inzamam-ul-Haq", correct: false },
+      { answer: "Younis Khan", correct: true },
+      { answer: "Shahid Afridi", correct: false },
+    ],
+  },
+  {
+    question:
+      "Which famous archaeological site is located in Pakistan and is known for its ancient civilization?",
+    answers: [
+      { answer: "Mohenjo-daro", correct: true },
+      { answer: "Harappa", correct: false },
+      { answer: "Taxila", correct: false },
+      { answer: "Chanhudaro", correct: false },
+    ],
+  },
+  {
+    question: "What is the national flower of Pakistan?",
+    answers: [
+      { answer: "Jasmine", correct: true },
+      { answer: "Rose", correct: false },
+      { answer: "Lily", correct: false },
+      { answer: "Sunflower", correct: false },
+    ],
+  },
+  {
+    question: "Who is the current Prime Minister of Pakistan (as of 2024)?",
+    answers: [
+      { answer: "Imran Khan", correct: true },
+      { answer: "Nawaz Sharif", correct: false },
+      { answer: "Asif Ali Zardari", correct: false },
+      { answer: "Bilawal Bhutto Zardari", correct: false },
+    ],
+  },
+  {
+    question:
+      "Which Pakistani actress won an Oscar for her role in the movie 'A Girl in the River'?",
+    answers: [
+      { answer: "Mahira Khan", correct: false },
+      { answer: "Saba Qamar", correct: false },
+      { answer: "Mehwish Hayat", correct: false },
+      { answer: "Sharmeen Obaid-Chinoy", correct: true },
+    ],
+  },
+  {
+    question: "Which famous Pakistani musician was known as the 'King of Pop'?",
+    answers: [
+      { answer: "Ali Zafar", correct: false },
+      { answer: "Atif Aslam", correct: false },
+      { answer: "Nusrat Fateh Ali Khan", correct: true },
+      { answer: "Rahat Fateh Ali Khan", correct: false },
+    ],
+  },
+  {
+    question:
+      "Which animal is associated with the national identity of Pakistan?",
+    answers: [
+      { answer: "Lion", correct: false },
+      { answer: "Markhor", correct: true },
+      { answer: "Tiger", correct: false },
+      { answer: "Leopard", correct: false },
+    ],
+  },
+  {
+    question:
+      "Which Pakistani city is known for its ancient Buddhist heritage and Gandhara art?",
+    answers: [
+      { answer: "Peshawar", correct: false },
+      { answer: "Quetta", correct: false },
+      { answer: "Lahore", correct: false },
+      { answer: "Taxila", correct: true },
+    ],
+  },
+  {
+    question: "Who was the first female Prime Minister of Pakistan?",
+    answers: [
+      { answer: "Fatima Jinnah", correct: false },
+      { answer: "Benazir Bhutto", correct: true },
+      { answer: "Asma Jahangir", correct: false },
+      { answer: "Hina Rabbani Khar", correct: false },
+    ],
+  },
+  {
+    question:
+      "Which Pakistani cricketer has the record for the most wickets in Test cricket?",
+    answers: [
+      { answer: "Wasim Akram", correct: false },
+      { answer: "Imran Khan", correct: false },
+      { answer: "Shoaib Akhtar", correct: false },
+      { answer: "Waqar Younis", correct: true },
+    ],
+  },
 ];
 
-let quizQuestionIndex = 1;
-let quizAnswerIndex = 1;
-let correctanswer = 0;
-let incorrectanswer = 0;
-correctAnswerDiv.textContent = `Correct: ${correctanswer}`;
-incorrectAnswerDiv.textContent = `InCorrect: ${incorrectanswer}`;
-
-quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
-
-let timerMint = 1;
-let timerSecond = 0;
-let quizTimerSet = setInterval(() => {
-  timerSecond++;
-  quizTimer.textContent = `${timerMint} : ${timerSecond} `;
-  if (timerSecond >= 5) {
-    timerMint--;
-    timerSecond = 0;
-    // quizTimer.textContent = `${timerMint} : ${timerSecond} `;
-  }
-
-  if (timerMint < 3) {
-    gsap.to(quizTimer, {
-      color: "red",
-      fontWeight: "400",
-      duration: 0.5,
-      ease: Power3.easeInOut,
-    });
-  }
-
-  if (timerMint <= 0) {
-    quizTimer.textContent = `${timerMint} : ${timerSecond} `;
-    correctAnswerVisible();
-    incorrectAnswerVisible();
-    formAlertVisible();
-    formAlertUnVisibleautomatic();
-    quizHeaderTopMove();
-    formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
-    formAlertText.textContent = " Time Over";
-    quizBodyUnVisible();
-    clearInterval(quizTimerSet);
-  }
-}, 1000);
-
-Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
-  quizAnswerBtnElem.textContent =
-    quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
-  gsap.to(quizAnswerBtnElem, {
-    backgroundColor: "rgb(0, 0, 0, 0.9)",
-  });
-
-  quizAnswerBtnElem.addEventListener("click", (e) => {
-    setTimeout(() => {
-      quizQuestionAutomaticChange();
-    }, 1500);
-
-    quizAnswerBtn.forEach((btn, index) => {
-      if (quizQuestions[quizAnswerIndex].answers[index].correct) {
-        gsap.to(btn, {
-          backgroundColor: "rgb(0, 128, 0, 0.5)",
-        });
-        if (
-          e.target.textContent ===
-          quizQuestions[quizAnswerIndex].answers[index].answer
-        ) {
-          correctanswer++;
-          console.log(correctanswer);
-          correctAnswerDiv.textContent = `Correct: ${correctanswer}`;
-        }
-      } else {
-        gsap.to(btn, {
-          backgroundColor: "rgb(255, 0, 0, 0.5)",
-        });
-      }
-    });
-  });
-});
-
-const quizQuestionAutomaticChange = () => {
-  quizQuestionIndex++;
-  quizAnswerIndex++;
-  if (
-    quizQuestionIndex >= quizQuestions.length &&
-    quizAnswerIndex >= quizQuestions.length
-  ) {
-    formAlertVisibleSuccess();
-    formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
-    formAlertIconChanger();
-    formAlertText.textContent = " Quiz Complete";
-    quizQuestionIndex = 0;
-    quizAnswerIndex = 0;
-    quizBodyUnVisible();
-  }
-  quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
+const startQuiz = () => {
+  quizQuestionIndex = 0;
+  quizAnswerIndex = 0;
+  timerSecond = 0;
+  timerMint = 5;
+  correctAnswer = 0;
+  correctAnswerDiv.textContent = `Correct: ${correctAnswer}`;
+  quizQuestionText.textContent = `Q${quizQuestionIndex + 1}. ${
+    quizQuestions[quizQuestionIndex].question
+  }`;
   Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
     quizAnswerBtnElem.textContent =
       quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
-    quizAnswerBtnElem.style.backgroundColor = "rgb(0, 0, 0, 0.9)";
+    gsap.to(quizAnswerBtnElem, {
+      backgroundColor: "rgb(0, 0, 0, 0.9)",
+    });
     quizAnswerBtnElem.addEventListener("click", (e) => {
       quizAnswerBtn.forEach((btn, index) => {
         if (quizQuestions[quizAnswerIndex].answers[index].correct) {
-          btn.style.backgroundColor = "rgb(0, 128, 0, 0.5)";
+          gsap.to(btn, {
+            backgroundColor: "rgb(0, 128, 0, 0.5)",
+          });
           if (
             e.target.textContent ===
             quizQuestions[quizAnswerIndex].answers[index].answer
           ) {
-            correctanswer++;
-            console.log(correctanswer);
+            correctAnswer++;
+            correctAnswerDiv.textContent = `Correct: ${correctAnswer}`;
           }
         } else {
-          btn.style.backgroundColor = "rgb(255, 0, 0, 0.5)";
+          gsap.to(btn, {
+            backgroundColor: "rgb(255, 0, 0, 0.5)",
+          });
+        }
+      });
+    });
+  });
+  quizTimerSet = setInterval(() => {
+    timerSecond++;
+    quizTimer.textContent = `${timerMint} : ${timerSecond} `;
+    if (timerSecond >= 60) {
+      timerMint--;
+      timerSecond = 0;
+    }
+
+    if (timerMint < 3) {
+      gsap.to(quizTimer, {
+        color: "red",
+        fontWeight: "400",
+        duration: 0.5,
+        ease: Power3.easeInOut,
+      });
+    }
+
+    if (timerMint <= 0) {
+      clearInterval(quizTimerSet);
+      correctAnswerVisible();
+      quizHeaderTopMove();
+      quizBodyUnVisible();
+      formAlertVisible();
+      formAlertUnVisibleautomatic();
+      formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+      formAlertText.textContent = " Time Over";
+    }
+  }, 1000);
+};
+
+const quizQuestionUpdate = () => {
+  quizQuestionIndex++;
+  quizAnswerIndex++;
+
+  if (
+    quizQuestionIndex >= quizQuestions.length &&
+    quizAnswerIndex >= quizQuestions.length
+  ) {
+    console.log("the end");
+    quizQuestionIndex = 0;
+    quizAnswerIndex = 0;
+    timerMint = 0;
+    timerSecond = 0;
+    clearInterval(quizTimerSet);
+    quizHeaderTopMove();
+    correctAnswerVisible();
+    quizBodyUnVisible();
+    formAlertVisibleSuccess();
+    formAlertIconChanger();
+    formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+    formAlertText.textContent = " Quiz Complete";
+  }
+
+  quizQuestionText.textContent = `Q${quizQuestionIndex + 1}. ${
+    quizQuestions[quizQuestionIndex].question
+  }`;
+  Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
+    quizAnswerBtnElem.textContent =
+      quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
+    gsap.to(quizAnswerBtnElem, {
+      backgroundColor: "rgb(0, 0, 0, 0.9)",
+    });
+
+    quizAnswerBtnElem.addEventListener("click", (e) => {
+      quizAnswerBtn.forEach((btn, index) => {
+        if (quizQuestions[quizAnswerIndex].answers[index].correct) {
+          gsap.to(btn, {
+            backgroundColor: "rgb(0, 128, 0, 0.5)",
+          });
+          if (
+            e.target.textContent ===
+            quizQuestions[quizAnswerIndex].answers[index].answer
+          ) {
+            correctAnswer++;
+            correctAnswerDiv.textContent = `Correct: ${correctAnswer}`;
+          }
+        } else {
+          gsap.to(btn, {
+            backgroundColor: "rgb(255, 0, 0, 0.5)",
+          });
         }
       });
     });
   });
 };
 
-quizQuestionNextBtn.addEventListener("click", () => {
-  quizQuestionAutomaticChange();
+quizStartBtn.addEventListener("click", () => {
+  startQuiz();
 });
+quizQuestionNextBtn.addEventListener("click", () => {
+  quizQuestionUpdate();
+});
+
+// const quizQuestionAutomaticChange = () => {
+//   userPageUnvisible();
+//   quizDivVisible();
+//   quizBodyVisible();
+//   quizQuestionIndex++;
+//   quizAnswerIndex++;
+//   correctAnswerDiv.textContent = `Correct: ${correctAnswer}`;
+//   quizTimerSet = setInterval(() => {
+//     timerSecond++;
+//     quizTimer.textContent = `${timerMint} : ${timerSecond} `;
+//     if (timerSecond >= 60) {
+//       timerMint--;
+//       timerSecond = 0;
+//     }
+
+//     if (timerMint < 3) {
+//       gsap.to(quizTimer, {
+//         color: "red",
+//         fontWeight: "400",
+//         duration: 0.5,
+//         ease: Power3.easeInOut,
+//       });
+//     }
+
+//     if (timerMint <= 0) {
+//       quizTimer.textContent = `${timerMint} : ${timerSecond} `;
+//       correctAnswerVisible();
+//       correctAnswerVisible();
+//       formAlertVisible();
+//       formAlertUnVisibleautomatic();
+//       quizHeaderTopMove();
+//       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+//       formAlertText.textContent = " Time Over";
+//       quizBodyUnVisible();
+//       clearInterval(quizTimerSet);
+//     }
+//   }, 1000);
+//   if (
+//     quizQuestionIndex >= quizQuestions.length &&
+//     quizAnswerIndex >= quizQuestions.length
+//   ) {
+//     correctAnswerVisible();
+//     quizHeaderTopMove();
+//     clearInterval(quizTimerSet);
+//     formAlertVisibleSuccess();
+//     quizBodyUnVisible();
+//     formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+//     formAlertIconChanger();
+//     formAlertText.textContent = " Quiz Complete";
+//     quizQuestionIndex = 0;
+//     quizAnswerIndex = 0;
+//   } else {
+//     quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
+//     Array.from(quizAnswerBtn).forEach(
+//       (quizAnswerBtnElem, quizAnswerBtnIndex) => {
+//         quizAnswerBtnElem.textContent =
+//           quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
+//         gsap.to(quizAnswerBtnElem, {
+//           backgroundColor: "rgb(0, 0, 0, 0.9)",
+//         });
+
+//         quizAnswerBtnElem.addEventListener("click", (e) => {
+//           let quizAnswerBtnClick = true;
+
+//           quizAnswerBtn.forEach((btn, index) => {
+//             if (quizQuestions[quizAnswerIndex].answers[index].correct) {
+//               gsap.to(btn, {
+//                 backgroundColor: "rgb(0, 128, 0, 0.5)",
+//               });
+//               if (
+//                 e.target.textContent ===
+//                 quizQuestions[quizAnswerIndex].answers[index].answer
+//               ) {
+//                 correctAnswer++;
+//                 correctAnswerDiv.textContent = `Correct: ${correctAnswer}`;
+//               }
+//             } else {
+//               gsap.to(btn, {
+//                 backgroundColor: "rgb(255, 0, 0, 0.5)",
+//               });
+//             }
+//           });
+
+//           if (quizAnswerBtnClick) {
+//             quizQuestionAutomaticChange();
+//           } else {
+//             formAlertVisible();
+//             formAlertUnVisibleautomatic();
+//             formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+//             formAlertText.textContent = " Click At Least One";
+//           }
+//         });
+//       }
+//     );
+//   }
+// };
+
+// quizStartBtn.addEventListener("click", () => {
+//   userPageUnvisible();
+//   quizDivVisible();
+//   quizBodyVisible();
+//   correctAnswerDiv.textContent = `Correct: ${correctAnswer}`;
+
+//   quizTimerSet = setInterval(() => {
+//     timerSecond++;
+//     quizTimer.textContent = `${timerMint} : ${timerSecond} `;
+//     if (timerSecond >= 60) {
+//       timerMint--;
+//       timerSecond = 0;
+//     }
+
+//     if (timerMint < 3) {
+//       gsap.to(quizTimer, {
+//         color: "red",
+//         fontWeight: "400",
+//         duration: 0.5,
+//         ease: Power3.easeInOut,
+//       });
+//     }
+
+//     if (timerMint <= 0) {
+//       quizTimer.textContent = `${timerMint} : ${timerSecond} `;
+//       correctAnswerVisible();
+//       correctAnswerVisible();
+//       formAlertVisible();
+//       formAlertUnVisibleautomatic();
+//       quizHeaderTopMove();
+//       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+//       formAlertText.textContent = " Time Over";
+//       quizBodyUnVisible();
+//       clearInterval(quizTimerSet);
+//     }
+//   }, 1000);
+
+//   quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
+
+//   Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
+//     quizAnswerBtnElem.textContent =
+//       quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
+//     gsap.to(quizAnswerBtnElem, {
+//       backgroundColor: "rgb(0, 0, 0, 0.9)",
+//     });
+//     quizAnswerBtnElem.addEventListener("click", (e) => {
+//       quizAnswerBtn.forEach((btn, index) => {
+//         if (quizQuestions[quizAnswerIndex].answers[index].correct) {
+//           gsap.to(btn, {
+//             backgroundColor: "rgb(0, 128, 0, 0.5)",
+//           });
+//           if (
+//             e.target.textContent ===
+//             quizQuestions[quizAnswerIndex].answers[index].answer
+//           ) {
+//             correctAnswer++;
+//             correctAnswerDiv.textContent = `Correct: ${correctAnswer}`;
+//           }
+//         } else {
+//           gsap.to(btn, {
+//             backgroundColor: "rgb(255, 0, 0, 0.5)",
+//           });
+//         }
+//       });
+//     });
+//   });
+// });
+
+// quizQuestionNextBtn.addEventListener("click", () => {
+//   quizQuestionAutomaticChange();
+// });
+
 const createAccount = () => {
   SignUpButton.addEventListener("click", () => {
-    gsap.to(signUpForm, {
-      x: 0,
-      opacity: 1,
-      duration: 0.4,
-      ease: Power3.easeInOut,
-    });
-
-    gsap.to(signInForm, {
-      x: "-150%",
-      opacity: 0,
-      duration: 0.4,
-      ease: Power3.easeInOut,
-    });
+    signUpFormVisible();
+    signInFormUnVisible();
   });
 
   SignInButton.addEventListener("click", () => {
-    gsap.to(signInForm, {
-      opacity: 1,
-      x: 0,
-      duration: 0.4,
-      ease: Power3.easeInOut,
-    });
-
-    gsap.to(signUpForm, {
-      opacity: 0,
-      x: "150%",
-      duration: 0.4,
-      ease: Power3.easeInOut,
-    });
+    signInFormVisible();
+    signUpFormUnVisible();
   });
   signUpForm.addEventListener("submit", (a) => {
     a.preventDefault();
@@ -518,6 +763,7 @@ const createAccount = () => {
       }
     }
   });
+
   signInForm.addEventListener("submit", (b) => {
     b.preventDefault();
 
@@ -547,6 +793,19 @@ const createAccount = () => {
         formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
         formAlertIconChanger();
         formAlertText.textContent = " Sign in SuccessFully";
+        if (formAlertText.textContent === " Sign in SuccessFully") {
+          setTimeout(() => {
+            signInFormUnVisible();
+            signUpFormUnVisible();
+            createAcountBtnsUnvisible();
+            userPageVisible();
+          }, 1000);
+          // let userNameCheck =
+          //   JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
+          // let userNameFind = userNameCheck.find((user) => user.name);
+          // console.log(userNameFind);
+          userName.textContent = `Salam ${matchingSaveData.name}`;
+        }
       } else {
         signUpForm.reset();
         formAlertVisible();
@@ -556,10 +815,8 @@ const createAccount = () => {
       }
     }
   });
-  let userCheck = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
 
-  let userNameFind = userCheck.find((user) => user.name);
-  userName.textContent = `Helloo ${userNameFind}`;
+  let userCheck = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
 
   let deleteAccountBtnCount = 0;
 
@@ -587,10 +844,16 @@ const createAccount = () => {
         if (userFind) {
           userCheck = userCheck.filter((e) => e.email != confirmEmail.value);
           localStorage.setItem("signUpUserInfo", JSON.stringify(userCheck));
+
           formAlertVisibleSuccess();
           formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
           formAlertIconChanger();
           formAlertText.textContent = " Remove Account SuccessFully";
+          if (formAlertText.textContent === " Remove Account SuccessFully") {
+            userPageUnvisible();
+            signUpFormVisible();
+            createAcountBtnsvisible();
+          }
           gsap.to(confirmEmailLabel, {
             x: "-200%",
             opacity: 0,

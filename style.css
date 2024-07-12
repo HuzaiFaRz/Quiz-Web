@@ -339,11 +339,10 @@ main::before {
   border-color: #ffee05;
 }
 
-.signup-form,
-.signin-form,
-.account-Btns {
+/* .signin-form,.signup-form,.account-Btns{
   display: none;
 }
+ */
 
 .user-page {
   width: 100%;
@@ -398,7 +397,7 @@ main::before {
 
 .quiz {
   position: relative;
-  width: 100%;
+  width: 1000%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -416,7 +415,7 @@ main::before {
   padding: 10px 20px;
   align-items: center;
 }
-.incorrectanswer,
+
 .correctanswer {
   font-size: 1.4rem;
   font-weight: 300;
