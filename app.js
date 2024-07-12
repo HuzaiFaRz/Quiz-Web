@@ -20,11 +20,89 @@ const quizQuestionText = document.querySelector(".quiz-question");
 const quizAnswerBtn = document.querySelectorAll(".quiz-answer-btn");
 const quizQuestionNextBtn = document.querySelector(".quiz-question-next");
 const quizTimer = document.querySelector(".quiz-timer");
+const quizHeader = document.querySelector(".quiz-header");
 const correctAnswerDiv = document.querySelector(".correctanswer");
 const incorrectAnswerDiv = document.querySelector(".incorrectanswer");
 
 let userSignedUp = false;
 let userLoggedIn = false;
+const formAlertVisible = () => {
+  gsap.to(formAlert, {
+    top: 0,
+    backgroundColor: "rgb(255, 0, 0, 0.8)",
+    duration: 0.6,
+    ease: Power3.easeInOut,
+  });
+};
+
+const formAlertVisibleSuccess = () => {
+  gsap.to(formAlert, {
+    top: 0,
+    backgroundColor: "rgb(0, 128, 0, 0.8)",
+    duration: 0.6,
+    ease: Power3.easeInOut,
+  });
+};
+
+const formAlertUnVisible = () => {
+  gsap.to(formAlert, {
+    top: "-15%",
+    duration: 0.6,
+    ease: Power3.easeInOut,
+  });
+};
+
+const formAlertUnVisibleautomatic = () => {
+  setTimeout(() => {
+    gsap.to(formAlert, {
+      top: "-15%",
+      duration: 0.6,
+      ease: Power3.easeInOut,
+    });
+  }, 3000);
+};
+
+const formAlertIconChanger = () => {
+  formAlertIcon.classList.replace("ri-alert-fill", "ri-check-double-fill");
+};
+
+const quizBodyUnVisible = () => {
+  gsap.to(quizBody, {
+    opacity: 0,
+    duration: 0.5,
+    ease: Power3.easeInOut,
+  });
+};
+const quizBodyVisible = () => {
+  gsap.to(quizBody, {
+    opacity: 1,
+    duration: 0.5,
+    ease: Power3.easeInOut,
+  });
+};
+
+const incorrectAnswerVisible = () => {
+  gsap.to(correctAnswerDiv, {
+    opacity: 1,
+    duration: 0.5,
+    ease: Power3.easeInOut,
+  });
+};
+
+const correctAnswerVisible = () => {
+  gsap.to(incorrectAnswerDiv, {
+    opacity: 1,
+    duration: 0.5,
+    ease: Power3.easeInOut,
+  });
+};
+const quizHeaderTopMove = () => {
+  gsap.to(quizHeader, {
+    y: "100%",
+    duration: 0.5,
+    ease: Power3.easeInOut,
+  });
+};
 
 let quizQuestions = [
   {
@@ -238,11 +316,46 @@ incorrectAnswerDiv.textContent = `InCorrect: ${incorrectanswer}`;
 
 quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
 
+let timerMint = 1;
+let timerSecond = 0;
+let quizTimerSet = setInterval(() => {
+  timerSecond++;
+  quizTimer.textContent = `${timerMint} : ${timerSecond} `;
+  if (timerSecond >= 5) {
+    timerMint--;
+    timerSecond = 0;
+    // quizTimer.textContent = `${timerMint} : ${timerSecond} `;
+  }
+
+  if (timerMint < 3) {
+    gsap.to(quizTimer, {
+      color: "red",
+      fontWeight: "400",
+      duration: 0.5,
+      ease: Power3.easeInOut,
+    });
+  }
+
+  if (timerMint <= 0) {
+    quizTimer.textContent = `${timerMint} : ${timerSecond} `;
+    correctAnswerVisible();
+    incorrectAnswerVisible();
+    formAlertVisible();
+    formAlertUnVisibleautomatic();
+    quizHeaderTopMove();
+    formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
+    formAlertText.textContent = " Time Over";
+    quizBodyUnVisible();
+    clearInterval(quizTimerSet);
+  }
+}, 1000);
+
 Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
   quizAnswerBtnElem.textContent =
     quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
-
-  quizAnswerBtnElem.style.backgroundColor = "rgb(0, 0, 0, 0.9)";
+  gsap.to(quizAnswerBtnElem, {
+    backgroundColor: "rgb(0, 0, 0, 0.9)",
+  });
 
   quizAnswerBtnElem.addEventListener("click", (e) => {
     setTimeout(() => {
@@ -251,17 +364,21 @@ Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
 
     quizAnswerBtn.forEach((btn, index) => {
       if (quizQuestions[quizAnswerIndex].answers[index].correct) {
-        btn.style.backgroundColor = "rgb(0, 128, 0, 0.5)";
-
+        gsap.to(btn, {
+          backgroundColor: "rgb(0, 128, 0, 0.5)",
+        });
         if (
           e.target.textContent ===
           quizQuestions[quizAnswerIndex].answers[index].answer
         ) {
           correctanswer++;
           console.log(correctanswer);
+          correctAnswerDiv.textContent = `Correct: ${correctanswer}`;
         }
       } else {
-        btn.style.backgroundColor = "rgb(255, 0, 0, 0.5)";
+        gsap.to(btn, {
+          backgroundColor: "rgb(255, 0, 0, 0.5)",
+        });
       }
     });
   });
@@ -280,11 +397,7 @@ const quizQuestionAutomaticChange = () => {
     formAlertText.textContent = " Quiz Complete";
     quizQuestionIndex = 0;
     quizAnswerIndex = 0;
-    gsap.to(quizBody, {
-      opacity: 0,
-      duration: 0.5,
-      ease: Power3.easeInOut,
-    });
+    quizBodyUnVisible();
   }
   quizQuestionText.textContent = `Q${quizQuestionIndex}. ${quizQuestions[quizQuestionIndex].question}`;
   Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
@@ -313,47 +426,6 @@ const quizQuestionAutomaticChange = () => {
 quizQuestionNextBtn.addEventListener("click", () => {
   quizQuestionAutomaticChange();
 });
-
-const formAlertVisible = () => {
-  gsap.to(formAlert, {
-    top: 0,
-    backgroundColor: "rgb(255, 0, 0, 0.8)",
-    duration: 0.6,
-    ease: Power3.easeInOut,
-  });
-};
-
-const formAlertVisibleSuccess = () => {
-  gsap.to(formAlert, {
-    top: 0,
-    backgroundColor: "rgb(0, 128, 0, 0.8)",
-    duration: 0.6,
-    ease: Power3.easeInOut,
-  });
-};
-
-const formAlertUnVisible = () => {
-  gsap.to(formAlert, {
-    top: "-10%",
-    duration: 0.6,
-    ease: Power3.easeInOut,
-  });
-};
-
-const formAlertUnVisibleautomatic = () => {
-  setTimeout(() => {
-    gsap.to(formAlert, {
-      top: "-10%",
-      duration: 0.6,
-      ease: Power3.easeInOut,
-    });
-  }, 3000);
-};
-
-const formAlertIconChanger = () => {
-  formAlertIcon.classList.replace("ri-alert-fill", "ri-check-double-fill");
-};
-
 const createAccount = () => {
   SignUpButton.addEventListener("click", () => {
     gsap.to(signUpForm, {
