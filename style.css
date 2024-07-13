@@ -10,7 +10,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 input:focus {
@@ -57,10 +57,10 @@ main::before {
 
 .account-page {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -174,7 +174,7 @@ main::before {
 #signup-password,
 #signup-confirm-password,
 #confirm-email {
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 1px;
   z-index: 1111;
   width: 100%;
@@ -182,7 +182,7 @@ main::before {
   color: white;
   box-shadow: none;
   border: none;
-  font-size: 16px;
+  font-size: 17px;
   padding: 0 15px;
   height: 50px;
   /* border-radius: 3rem 6rem 0 5rem; */
@@ -339,10 +339,11 @@ main::before {
   border-color: #ffee05;
 }
 
-/* .signin-form,.signup-form,.account-Btns{
+/* .signin-form,
+.signup-form,
+.account-Btns {
   display: none;
-}
- */
+} */
 
 .user-page {
   width: 100%;
@@ -397,7 +398,7 @@ main::before {
 
 .quiz {
   position: relative;
-  width: 1000%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -499,8 +500,8 @@ main::before {
 
   .signin-form {
     width: 50%;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 30%;
+    transform: translateY(-30%);
   }
   .signin-form > h1,
   .signup-form > h1 {
