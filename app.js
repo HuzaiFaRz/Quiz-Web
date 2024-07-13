@@ -656,7 +656,7 @@ const createAccount = () => {
           //   JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
           // let userNameFind = userNameCheck.find((user) => user.name);
           // console.log(userNameFind);
-          userName.textContent = `Salam ${matchingSaveData.name}`;
+          userName.textContent = `Hi! ${matchingSaveData.name}`;
         }
       } else {
         signUpForm.reset();
