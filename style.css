@@ -152,7 +152,8 @@ main::before {
 .signup-email-label,
 .signup-password-label,
 .signup-confirm-password-label,
-.confirm-email-label {
+.confirm-email-label,
+.confirm-password-delete-label {
   font-weight: 300;
   cursor: pointer;
   z-index: 1111;
@@ -196,7 +197,8 @@ main::before {
 #signup-email,
 #signup-password,
 #signup-confirm-password,
-#confirm-email {
+#confirm-email,
+#confirm-password-delete {
   font-weight: 400;
   letter-spacing: 1px;
   z-index: 1111;
@@ -217,7 +219,8 @@ main::before {
 #signup-email:focus,
 #signup-password:focus,
 #signup-confirm-password:focus,
-#confirm-email:focus {
+#confirm-email:focus,
+#confirm-password-delete:focus {
   outline: none;
 }
 #signin-email::placeholder,
@@ -226,7 +229,8 @@ main::before {
 #signup-email::placeholder,
 #signup-password::placeholder,
 #signup-confirm-password::placeholder,
-#confirm-email::placeholder {
+#confirm-email::placeholder,
+#confirm-password-delete::placeholder {
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.5px;
@@ -382,16 +386,25 @@ main::before {
 .user-page-header {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
-
-.confirm-email-label {
+.account-delete-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* .confirm-email-label {
   opacity: 0.5;
   transform: translateX(-200%);
 }
-
+.confirm-password-delete-label {
+  opacity: 0;
+  transform: translateX(200%);
+} */
 .user-name {
   font-size: 3rem;
   color: #ffee05;

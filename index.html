@@ -106,16 +106,32 @@
         <div class="user-page">
           <div class="user-page-header">
             <div class="logout-btn">Log Out</div>
-            <label for="confirm-email" class="confirm-email-label">
-              Confirm Email *
-              <input
-                type="email"
-                id="confirm-email"
-                placeholder="Email"
-                name="confirmemail"
-              />
-            </label>
-            <div class="deleteaccount-btn">Remove An Account</div>
+            <form class="account-delete-form">
+              <label for="confirm-email" class="confirm-email-label">
+                Confirm Email *
+                <input
+                  type="email"
+                  id="confirm-email"
+                  placeholder="Email"
+                  name="deleteconfirmemail"
+                />
+              </label>
+              <label
+                for="confirm-password-delete"
+                class="confirm-password-delete-label"
+              >
+                Confirm Password *
+                <input
+                  type="password"
+                  id="confirm-password-delete"
+                  placeholder="Password"
+                  name="deleteconfirmdelete"
+                />
+              </label>
+              <button type="submit" class="deleteaccount-btn">
+                Remove An Account
+              </button>
+            </form>
           </div>
 
           <div class="user-name">Heloo User</div>

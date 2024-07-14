@@ -1,5 +1,6 @@
 const signUpForm = document.querySelector(".signup-form");
 const signInForm = document.querySelector(".signin-form");
+const accountDeleteForm = document.querySelector(".account-delete-form");
 const createAcountBtns = document.querySelector(".account-Btns");
 const SignUpButton = document.querySelector(".SignUpButton");
 const SignInButton = document.querySelector(".SignInButton");
@@ -10,6 +11,9 @@ const formAlertIcon = document.querySelector(".form-alert-icon");
 const userPage = document.querySelector(".user-page");
 const userName = document.querySelector(".user-name");
 const confirmEmailLabel = document.querySelector(".confirm-email-label");
+const confirmpassworddeleteLabel = document.querySelector(
+  ".confirm-password-delete-label"
+);
 const confirmEmail = document.querySelector("#confirm-email");
 const logOutbtn = document.querySelector(".logout-btn");
 const deleteAccountBtn = document.querySelector(".deleteaccount-btn");
@@ -33,6 +37,8 @@ let timerMint = 10;
 let timerSecond = 0;
 let quizTimerSet;
 var quizAnswerBtnClicked = false;
+
+let USER_KEY = "Users";
 
 const formAlertVisible = () => {
   gsap.to(formAlert, {
@@ -205,10 +211,15 @@ const userPageUnVisible = () => {
     ease: Power3.easeInOut,
   });
 };
-
-userPageUnVisible();
 quizBodyUnVisible();
 quizDivUnvisible();
+
+// userPageUnVisible();
+
+userPageVisible();
+signUpFormUnVisible();
+signInFormUnVisible();
+createAcountBtnsUnvisible();
 
 let quizQuestions = [
   {
@@ -562,32 +573,32 @@ const createAccount = () => {
       name: signUpFormData.get("name"),
       email: signUpFormData.get("signupemail"),
       password: signUpFormData.get("signuppassword"),
-      confirmPassword: signUpFormData.get("signupconfirmpassword"),
     };
 
     if (
       !signUpUserInfo.name ||
       !signUpUserInfo.email ||
       !signUpUserInfo.password ||
-      !signUpUserInfo.confirmPassword
+      !signUpFormData.get("signupconfirmpassword")
     ) {
       formAlertVisible();
       formAlertUnVisibleautomatic();
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
       formAlertText.textContent = " Fill All Field";
-    } else if (signUpUserInfo.password.length < 8) {
+    } else if (signUpUserInfo.password.length < 1) {
       formAlertVisible();
       formAlertUnVisibleautomatic();
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
       formAlertText.textContent = " Passowrd At Least Eight Character";
-    } else if (signUpUserInfo.password !== signUpUserInfo.confirmPassword) {
+    } else if (
+      signUpUserInfo.password !== signUpFormData.get("signupconfirmpassword")
+    ) {
       formAlertVisible();
       formAlertUnVisibleautomatic();
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
       formAlertText.textContent = " Passowrd Does Not Match";
     } else {
-      let signUpUserInfoSave =
-        JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
+      let signUpUserInfoSave = JSON.parse(localStorage.getItem(USER_KEY)) || [];
 
       let signUpUserInfoSaveCheck = signUpUserInfoSave.find(
         (user) => user.email === signUpUserInfo.email
@@ -603,10 +614,7 @@ const createAccount = () => {
         userSignedUp = true;
         signUpForm.reset();
         signUpUserInfoSave.push(signUpUserInfo);
-        localStorage.setItem(
-          "signUpUserInfo",
-          JSON.stringify(signUpUserInfoSave)
-        );
+        localStorage.setItem(USER_KEY, JSON.stringify(signUpUserInfoSave));
         formAlertVisibleSuccess();
         formAlertUnVisibleautomatic();
         formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
@@ -629,7 +637,7 @@ const createAccount = () => {
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
       formAlertText.textContent = " Fill All Field";
     } else {
-      let saveUser = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
+      let saveUser = JSON.parse(localStorage.getItem(USER_KEY)) || [];
 
       let matchingSaveData = saveUser.find(
         (user) =>
@@ -653,7 +661,7 @@ const createAccount = () => {
             userPageVisible();
           }, 1000);
           // let userNameCheck =
-          //   JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
+          //   JSON.parse(localStorage.getItem(USER_KEY)) || [];
           // let userNameFind = userNameCheck.find((user) => user.name);
           // console.log(userNameFind);
           userName.textContent = `Hi! ${matchingSaveData.name}`;
@@ -663,41 +671,67 @@ const createAccount = () => {
         formAlertVisible();
         formAlertUnVisibleautomatic();
         formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
-        formAlertText.textContent = " User Not Found Sign Up";
+        formAlertText.textContent = " Incorrect Email Or Password";
       }
     }
   });
 
-  let userCheck = JSON.parse(localStorage.getItem("signUpUserInfo")) || [];
-
+  
+  let userCheck = JSON.parse(localStorage.getItem(USER_KEY)) || [];
   let deleteAccountBtnCount = 0;
 
-  deleteAccountBtn.addEventListener("click", (e) => {
+  accountDeleteForm.addEventListener("submit", (l) => {
+    l.preventDefault();
     deleteAccountBtnCount++;
-    if (deleteAccountBtnCount === 1) {
-      confirmEmail.value = "";
-      gsap.to(confirmEmailLabel, {
-        x: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: Power3.easeInOut,
-      });
-    }
-    if (deleteAccountBtnCount >= 2) {
-      let userFind = userCheck.find(
-        (user) => user.email === confirmEmail.value
-      );
+    let accountDeleteFormData = new FormData(l.currentTarget);
 
-      if (confirmEmail.value === "") {
+    let accountDeleteUserInfo = {
+      email: accountDeleteFormData.get("deleteconfirmemail"),
+      password: accountDeleteFormData.get("deleteconfirmdelete"),
+    };
+
+    if (deleteAccountBtnCount === 1) {
+      accountDeleteUserInfo.email = "";
+      accountDeleteUserInfo.password = "";
+      // gsap.to(confirmEmailLabel, {
+      //   x: 0,
+      //   opacity: 1,
+      //   duration: 0.8,
+      //   ease: Power1.easeInOut,
+      // });
+      // gsap.to(confirmpassworddeleteLabel, {
+      //   x: "0",
+      //   opacity: 1,
+      //   duration: 0.8,
+      //   ease: Power1.easeInOut,
+      // });
+    }
+
+    if (deleteAccountBtnCount >= 2) {
+      let userFind = userCheck.find((user) => {
+        return (
+          user.email === accountDeleteUserInfo.email &&
+          user.password === accountDeleteUserInfo.password
+        );
+      });
+      console.log(userFind);
+      if (!accountDeleteUserInfo.email || !accountDeleteUserInfo.password) {
         formAlertVisible();
         formAlertUnVisibleautomatic();
         formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
         formAlertText.textContent = " Fill Field";
       } else {
         if (userFind) {
-          userCheck = userCheck.filter((e) => e.email != confirmEmail.value);
-          localStorage.setItem("signUpUserInfo", JSON.stringify(userCheck));
+          userCheck = userCheck.filter((e) => {
+            return (
+              e.email !== accountDeleteUserInfo.email ||
+              e.password !== accountDeleteUserInfo.password
+            );
+          });
 
+          localStorage.setItem(USER_KEY, JSON.stringify(userCheck));
+
+          formAlertUnVisibleautomatic();
           formAlertVisibleSuccess();
           formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
           formAlertIconChanger();
@@ -713,13 +747,20 @@ const createAccount = () => {
             duration: 0.6,
             ease: Power3.easeInOut,
           });
+          gsap.to(confirmpassworddeleteLabel, {
+            x: "200%",
+            opacity: 0,
+            duration: 0.8,
+            ease: Power1.easeInOut,
+          });
           deleteAccountBtnCount = 0;
         } else {
           formAlertVisible();
           formAlertUnVisibleautomatic();
           formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
           formAlertText.textContent = " Wrong Email";
-          confirmEmail.value = "";
+          accountDeleteUserInfo.email = "";
+          accountDeleteUserInfo.password = "";
         }
       }
     }
