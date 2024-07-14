@@ -211,15 +211,16 @@ const userPageUnVisible = () => {
     ease: Power3.easeInOut,
   });
 };
+
+userPageUnVisible();
 quizBodyUnVisible();
 quizDivUnvisible();
-
-// userPageUnVisible();
-
-userPageVisible();
-signUpFormUnVisible();
-signInFormUnVisible();
-createAcountBtnsUnvisible();
+// quizBodyVisible();
+// quizDivVisible();
+// userPageVisible();
+// signUpFormUnVisible();
+// signInFormUnVisible();
+// createAcountBtnsUnvisible();
 
 let quizQuestions = [
   {
@@ -417,15 +418,19 @@ let quizQuestions = [
 const startQuiz = () => {
   quizQuestionIndex = 0;
   quizAnswerIndex = 0;
-  timerSecond = 0;
-  timerMint = 5;
   correctAnswer = 0;
+
+  timerSecond = 60;
+  timerMint = 5;
+
   quizTimerSet = setInterval(() => {
-    timerSecond++;
+    timerSecond--;
     quizTimer.textContent = `${timerMint} : ${timerSecond} `;
-    if (timerSecond >= 60) {
+
+    if (timerSecond <= 0) {
       timerMint--;
-      timerSecond = 0;
+      timerSecond = 60;
+      quizTimer.textContent = `${timerMint} : ${timerSecond} `;
     }
 
     if (timerMint < 3) {
@@ -437,7 +442,7 @@ const startQuiz = () => {
       });
     }
 
-    if (timerMint <= 0) {
+    if (timerMint < 0) {
       clearInterval(quizTimerSet);
       correctAnswerVisible();
       quizHeaderTopMove();
@@ -585,7 +590,7 @@ const createAccount = () => {
       formAlertUnVisibleautomatic();
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
       formAlertText.textContent = " Fill All Field";
-    } else if (signUpUserInfo.password.length < 1) {
+    } else if (signUpUserInfo.password.length < 8) {
       formAlertVisible();
       formAlertUnVisibleautomatic();
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
@@ -660,10 +665,6 @@ const createAccount = () => {
             createAcountBtnsUnvisible();
             userPageVisible();
           }, 1000);
-          // let userNameCheck =
-          //   JSON.parse(localStorage.getItem(USER_KEY)) || [];
-          // let userNameFind = userNameCheck.find((user) => user.name);
-          // console.log(userNameFind);
           userName.textContent = `Hi! ${matchingSaveData.name}`;
         }
       } else {
@@ -676,7 +677,6 @@ const createAccount = () => {
     }
   });
 
-  
   let userCheck = JSON.parse(localStorage.getItem(USER_KEY)) || [];
   let deleteAccountBtnCount = 0;
 
@@ -693,18 +693,18 @@ const createAccount = () => {
     if (deleteAccountBtnCount === 1) {
       accountDeleteUserInfo.email = "";
       accountDeleteUserInfo.password = "";
-      // gsap.to(confirmEmailLabel, {
-      //   x: 0,
-      //   opacity: 1,
-      //   duration: 0.8,
-      //   ease: Power1.easeInOut,
-      // });
-      // gsap.to(confirmpassworddeleteLabel, {
-      //   x: "0",
-      //   opacity: 1,
-      //   duration: 0.8,
-      //   ease: Power1.easeInOut,
-      // });
+      gsap.to(confirmEmailLabel, {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: Power1.easeInOut,
+      });
+      gsap.to(confirmpassworddeleteLabel, {
+        x: "0",
+        opacity: 1,
+        duration: 0.8,
+        ease: Power1.easeInOut,
+      });
     }
 
     if (deleteAccountBtnCount >= 2) {
@@ -758,7 +758,7 @@ const createAccount = () => {
           formAlertVisible();
           formAlertUnVisibleautomatic();
           formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
-          formAlertText.textContent = " Wrong Email";
+          formAlertText.textContent = " Wrong Email Or Password";
           accountDeleteUserInfo.email = "";
           accountDeleteUserInfo.password = "";
         }

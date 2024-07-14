@@ -397,14 +397,14 @@ main::before {
   justify-content: center;
   align-items: center;
 }
-/* .confirm-email-label {
+.confirm-email-label {
   opacity: 0.5;
   transform: translateX(-200%);
 }
 .confirm-password-delete-label {
   opacity: 0;
   transform: translateX(200%);
-} */
+}
 .user-name {
   font-size: 3rem;
   color: #ffee05;
