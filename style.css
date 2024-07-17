@@ -169,7 +169,8 @@ main::before {
 }
 .signup-confirm-password-label,
 .signin-password-label,
-.signup-password-label {
+.signup-password-label,
+.confirm-password-delete-label {
   position: relative;
   overflow: hidden;
 }
@@ -397,6 +398,8 @@ main::before {
   justify-content: center;
   align-items: center;
 }
+
+
 .confirm-email-label {
   opacity: 0.5;
   transform: translateX(-200%);
@@ -405,6 +408,7 @@ main::before {
   opacity: 0;
   transform: translateX(200%);
 }
+
 .user-name {
   font-size: 3rem;
   color: #ffee05;

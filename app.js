@@ -37,8 +37,9 @@ let timerMint = 10;
 let timerSecond = 0;
 let quizTimerSet;
 var quizAnswerBtnClicked = false;
-
 let USER_KEY = "Users";
+let signUpUserInfoSave = JSON.parse(localStorage.getItem(USER_KEY)) || [];
+let deleteAccountBtnCount = 0;
 
 const formAlertVisible = () => {
   gsap.to(formAlert, {
@@ -212,9 +213,18 @@ const userPageUnVisible = () => {
   });
 };
 
-userPageUnVisible();
-quizBodyUnVisible();
-quizDivUnvisible();
+window.addEventListener("DOMContentLoaded", () => {
+  userPageUnVisible();
+  quizBodyUnVisible();
+  quizDivUnvisible();
+});
+window.addEventListener("load", () => {
+  signUpFormUnVisible();
+
+  userPageVisible();
+  quizBodyUnVisible();
+  quizDivUnvisible();
+});
 // quizBodyVisible();
 // quizDivVisible();
 // userPageVisible();
@@ -603,11 +613,9 @@ const createAccount = () => {
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
       formAlertText.textContent = " Passowrd Does Not Match";
     } else {
-      let signUpUserInfoSave = JSON.parse(localStorage.getItem(USER_KEY)) || [];
-
-      let signUpUserInfoSaveCheck = signUpUserInfoSave.find(
-        (user) => user.email === signUpUserInfo.email
-      );
+      let signUpUserInfoSaveCheck = signUpUserInfoSave.find((user) => {
+        return user.email === signUpUserInfo.email;
+      });
 
       if (signUpUserInfoSaveCheck) {
         formAlertVisible();
@@ -644,11 +652,12 @@ const createAccount = () => {
     } else {
       let saveUser = JSON.parse(localStorage.getItem(USER_KEY)) || [];
 
-      let matchingSaveData = saveUser.find(
-        (user) =>
+      let matchingSaveData = saveUser.find((user) => {
+        return (
           user.email === signInFormData.get("signinemail") &&
           user.password === signInFormData.get("signinpassword")
-      );
+        );
+      });
 
       if (matchingSaveData) {
         userLoggedIn = true;
@@ -677,13 +686,12 @@ const createAccount = () => {
     }
   });
 
-  let userCheck = JSON.parse(localStorage.getItem(USER_KEY)) || [];
-  let deleteAccountBtnCount = 0;
-
   accountDeleteForm.addEventListener("submit", (l) => {
     l.preventDefault();
     deleteAccountBtnCount++;
     let accountDeleteFormData = new FormData(l.currentTarget);
+
+    let userCheck = JSON.parse(localStorage.getItem(USER_KEY)) || [];
 
     let accountDeleteUserInfo = {
       email: accountDeleteFormData.get("deleteconfirmemail"),
@@ -691,8 +699,6 @@ const createAccount = () => {
     };
 
     if (deleteAccountBtnCount === 1) {
-      accountDeleteUserInfo.email = "";
-      accountDeleteUserInfo.password = "";
       gsap.to(confirmEmailLabel, {
         x: 0,
         opacity: 1,
@@ -708,19 +714,19 @@ const createAccount = () => {
     }
 
     if (deleteAccountBtnCount >= 2) {
-      let userFind = userCheck.find((user) => {
-        return (
-          user.email === accountDeleteUserInfo.email &&
-          user.password === accountDeleteUserInfo.password
-        );
-      });
-      console.log(userFind);
       if (!accountDeleteUserInfo.email || !accountDeleteUserInfo.password) {
         formAlertVisible();
         formAlertUnVisibleautomatic();
         formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
         formAlertText.textContent = " Fill Field";
       } else {
+        let userFind = userCheck.find((user) => {
+          return (
+            user.email === accountDeleteUserInfo.email &&
+            user.password === accountDeleteUserInfo.password
+          );
+        });
+        console.log(userFind);
         if (userFind) {
           userCheck = userCheck.filter((e) => {
             return (
