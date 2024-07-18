@@ -61,7 +61,7 @@ const formAlertVisibleSuccess = () => {
 
 const formAlertUnVisible = () => {
   gsap.to(formAlert, {
-    top: "-15%",
+    top: "-30%",
     duration: 0.6,
     ease: Power3.easeInOut,
   });
@@ -70,7 +70,7 @@ const formAlertUnVisible = () => {
 const formAlertUnVisibleautomatic = () => {
   setTimeout(() => {
     gsap.to(formAlert, {
-      top: "-15%",
+      top: "-30%",
       duration: 0.6,
       ease: Power3.easeInOut,
     });
@@ -124,6 +124,7 @@ const signInFormVisible = () => {
     ease: Power3.easeInOut,
   });
 };
+
 const signInFormUnVisible = () => {
   gsap.to(signInForm, {
     visibility: "hidden",
@@ -184,7 +185,7 @@ const quizDivVisible = () => {
   });
 };
 
-const quizDivUnvisible = () => {
+const quizDivUnVisible = () => {
   gsap.to(quizDiv, {
     display: "none",
     y: "200%",
@@ -216,21 +217,14 @@ const userPageUnVisible = () => {
 window.addEventListener("DOMContentLoaded", () => {
   userPageUnVisible();
   quizBodyUnVisible();
-  quizDivUnvisible();
+  quizDivUnVisible();
 });
 window.addEventListener("load", () => {
-  signUpFormUnVisible();
-
-  userPageVisible();
+  userPageUnVisible();
   quizBodyUnVisible();
-  quizDivUnvisible();
+  quizDivUnVisible();
 });
-// quizBodyVisible();
-// quizDivVisible();
-// userPageVisible();
-// signUpFormUnVisible();
-// signInFormUnVisible();
-// createAcountBtnsUnvisible();
+
 
 let quizQuestions = [
   {

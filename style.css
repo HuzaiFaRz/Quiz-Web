@@ -17,12 +17,8 @@ input:focus {
   background-color: rgb(255, 238, 5, 0.1);
 }
 
-/* input:-internal-autofill-selected {
-  background-color: rgb(255, 238, 5, 0.1) !important;
-} */
-
 input:-internal-autofill-selected {
-  appearance: unset;
+  appearance: unset !important;
   background-image: none !important;
   background-color: rgb(255, 238, 5, 0.1) !important;
   color: white !important;
@@ -61,7 +57,7 @@ main::before {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -75,13 +71,22 @@ main::before {
   padding: 20px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+}
+.account-Btns {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 1111;
 }
 
 .form-alert {
   position: absolute;
-  top: -10%;
+  top: -30%;
   width: 100%;
   padding: 20px 20px;
   background-color: rgb(255, 0, 0, 0.8);
@@ -90,6 +95,7 @@ main::before {
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .form-alert > div {
   display: flex;
   flex-direction: row;
@@ -108,16 +114,18 @@ main::before {
 }
 .signin-form {
   width: 50%;
-  height: max-content;
   opacity: 0;
+  top: 30%;
+  transform: translateY(-30%);
   transform: translateX(-150%);
 }
 
 .signup-form {
   width: 50%;
-  height: max-content;
   opacity: 1;
-  /* transform: translateX(-200%); */
+  top: 15%;
+  transform: translateY(-15%);
+  transform: translateX(0%);
 }
 
 .signin-form::before,
@@ -138,7 +146,7 @@ main::before {
 
 .signin-form > h1,
 .signup-form > h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 300;
   z-index: 1111;
   text-shadow: 5px 5px 30px #ffee05;
@@ -154,25 +162,19 @@ main::before {
 .signup-confirm-password-label,
 .confirm-email-label,
 .confirm-password-delete-label {
+  position: relative;
   font-weight: 300;
   cursor: pointer;
   z-index: 1111;
   width: 100%;
   color: #ffee05;
-  font-size: 1.6rem;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 10px 10px;
-  padding: 20px 20px;
-}
-.signup-confirm-password-label,
-.signin-password-label,
-.signup-password-label,
-.confirm-password-delete-label {
-  position: relative;
-  overflow: hidden;
+  padding: 15px 15px;
 }
 
 .passowrd-eye {
@@ -182,8 +184,8 @@ main::before {
   background-position: center;
   cursor: pointer !important;
   position: absolute;
-  top: 50%;
-  transform: translateY(50%);
+  top: 45%;
+  transform: translateY(45%);
   right: 5%;
   width: 20px;
   height: 20px;
@@ -192,6 +194,7 @@ main::before {
 .passwordEyeCut {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgba(255,238,5,1)'%3E%3Cpath fill='none' d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12ZM12.0003 17C14.7617 17 17.0003 14.7614 17.0003 12C17.0003 9.23858 14.7617 7 12.0003 7C9.23884 7 7.00026 9.23858 7.00026 12C7.00026 14.7614 9.23884 17 12.0003 17ZM12.0003 15C10.3434 15 9.00026 13.6569 9.00026 12C9.00026 10.3431 10.3434 9 12.0003 9C13.6571 9 15.0003 10.3431 15.0003 12C15.0003 13.6569 13.6571 15 12.0003 15Z'%3E%3C/path%3E%3C/svg%3E");
 }
+
 #signin-email,
 #signin-password,
 #name,
@@ -208,9 +211,9 @@ main::before {
   color: white;
   box-shadow: none;
   border: none;
-  font-size: 17px;
-  padding: 0 15px;
-  height: 50px;
+  font-size: 1rem;
+  padding: 15px 15px;
+  /* height: 50px; */
   /* border-radius: 3rem 6rem 0 5rem; */
 }
 
@@ -232,7 +235,7 @@ main::before {
 #signup-confirm-password::placeholder,
 #confirm-email::placeholder,
 #confirm-password-delete::placeholder {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.5px;
   color: white;
@@ -295,17 +298,6 @@ main::before {
   background-color: rgb(255, 238, 5, 0.3);
 }
 
-.account-Btns {
-  width: 100%;
-  height: 20%;
-  position: absolute;
-  top: 2%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
 .SignUpButton,
 .SignInButton {
   transition: 0.4s ease-in-out;
@@ -320,15 +312,13 @@ main::before {
   letter-spacing: 1px;
   box-shadow: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 .SignUpButton:hover,
 .SignInButton:hover {
   transition: 0.2s ease-in-out;
-  transform: scale(1.1);
   border-radius: 20px 20px 0 20px;
-  background-color: rgb(255, 238, 5, 0.3);
 }
 .SignUpButton::before,
 .SignUpButton::after,
@@ -398,7 +388,6 @@ main::before {
   justify-content: center;
   align-items: center;
 }
-
 
 .confirm-email-label {
   opacity: 0.5;
@@ -588,11 +577,97 @@ main::before {
     font-size: 1rem;
   }
 }
+
 @media (max-width: 900px) {
   .signin-form {
     width: 80%;
   }
 }
+
+@media (max-width: 500px) {
+  .signin-form > h1,
+  .signup-form > h1 {
+    font-size: 1.5rem;
+  }
+  .passowrd-eye {
+    background-size: 15px;
+    right: 10%;
+    width: 15px;
+    height: 15px;
+    top: 50%;
+    transform: translateY(50%);
+  }
+  .signin-email-label,
+  .signin-password-label,
+  .name-label,
+  .signup-email-label,
+  .signup-password-label,
+  .signup-confirm-password-label,
+  .confirm-email-label,
+  .confirm-password-delete-label {
+    font-size: 0.9rem;
+  }
+
+  #signin-email,
+  #signin-password,
+  #name,
+  #signup-email,
+  #signup-password,
+  #signup-confirm-password,
+  #confirm-email,
+  #confirm-password-delete {
+    font-size: 0.8rem;
+  }
+  #signin-email::placeholder,
+  #signin-password::placeholder,
+  #name::placeholder,
+  #signup-email::placeholder,
+  #signup-password::placeholder,
+  #signup-confirm-password::placeholder,
+  #confirm-email::placeholder,
+  #confirm-password-delete::placeholder {
+    font-size: 0.8rem;
+  }
+
+  .start-quiz-btn,
+  .logout-btn,
+  .deleteaccount-btn,
+  .signup-submit-btn,
+  .signin-submit-btn {
+    font-size: 0.8rem;
+  }
+  .quiz-timer {
+    font-size: 1rem;
+  }
+  .quiz {
+    padding: 0 10px;
+  }
+  .quiz-body {
+    width: 100%;
+    height: max-content;
+    padding: 12px 0;
+  }
+  .quiz-question {
+    font-size: 1rem;
+  }
+  .quiz-question-next,
+  .quiz-answer-btn {
+    font-size: 0.8rem;
+  }
+  .user-name {
+    font-size: 1.5rem;
+  }
+
+  .form-alert > div > i,
+  .form-alert-close {
+    font-size: 17px;
+  }
+
+  .form-alert-text {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 350px) {
   .account-page {
     padding: 20px 0 !important;
