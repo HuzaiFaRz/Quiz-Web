@@ -116,6 +116,7 @@ main::before {
   width: 50%;
   opacity: 0;
   top: 30%;
+  visibility: hidden;
   transform: translateY(-30%);
   transform: translateX(-150%);
 }
