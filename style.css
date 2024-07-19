@@ -77,7 +77,7 @@ main::before {
 .account-Btns {
   width: 100%;
   padding: 20px 0;
-  display: none;
+  display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
