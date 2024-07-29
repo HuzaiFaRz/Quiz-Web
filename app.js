@@ -216,18 +216,16 @@ const userPageUnVisible = () => {
   });
 };
 
-// window.addEventListener("DOMContentLoaded", () => {
-//   userPageUnVisible();
-//   quizBodyUnVisible();
-//   quizDivUnVisible();
-// });
+window.addEventListener("DOMContentLoaded", () => {
+  userPageUnVisible();
+  quizBodyUnVisible();
+  quizDivUnVisible();
+});
 
 window.addEventListener("load", () => {
   userPageUnVisible();
-  signInFormUnVisible();
-  signUpFormUnVisible();
-  quizBodyVisible();
-  quizDivVisible();
+  quizBodyUnVisible();
+  quizDivUnVisible();
 });
 
 let quizQuestions = [
