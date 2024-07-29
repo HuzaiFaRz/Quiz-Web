@@ -216,16 +216,18 @@ const userPageUnVisible = () => {
   });
 };
 
-window.addEventListener("DOMContentLoaded", () => {
-  userPageUnVisible();
-  quizBodyUnVisible();
-  quizDivUnVisible();
-});
+// window.addEventListener("DOMContentLoaded", () => {
+//   userPageUnVisible();
+//   quizBodyUnVisible();
+//   quizDivUnVisible();
+// });
 
 window.addEventListener("load", () => {
   userPageUnVisible();
-  quizBodyUnVisible();
-  quizDivUnVisible();
+  signInFormUnVisible();
+  signUpFormUnVisible();
+  quizBodyVisible();
+  quizDivVisible();
 });
 
 let quizQuestions = [
@@ -435,7 +437,6 @@ const startQuiz = () => {
     if (timerSecond <= 0) {
       timerMint--;
       timerSecond = 60;
-      quizTimer.textContent = `${timerMint} : ${timerSecond} `;
     }
 
     if (timerMint < 1) {
@@ -501,6 +502,7 @@ const quizQuestionUpdate = () => {
     timerMint = 0;
     timerSecond = 0;
     clearInterval(quizTimerSet);
+    quizTimer.textContent = `${0} : ${(0, 0)} `;
     quizHeaderTopMove();
     // correctAnswerVisible();
     quizBodyUnVisible();
