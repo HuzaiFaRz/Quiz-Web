@@ -280,8 +280,8 @@ let quizQuestions = [
   {
     question: "What is the national sport of Pakistan?",
     answers: [
-      { answer: "Cricket", correct: true },
-      { answer: "Hockey", correct: false },
+      { answer: "Cricket", correct: false },
+      { answer: "Hockey", correct: true },
       { answer: "Football", correct: false },
       { answer: "Polo", correct: false },
     ],
@@ -355,8 +355,8 @@ let quizQuestions = [
   {
     question: "Who is the current Prime Minister of Pakistan (as of 2024)?",
     answers: [
-      { answer: "Imran Khan", correct: true },
-      { answer: "Nawaz Sharif", correct: false },
+      { answer: "Imran Khan", correct: false },
+      { answer: "Shehbaz Sharif", correct: true },
       { answer: "Asif Ali Zardari", correct: false },
       { answer: "Bilawal Bhutto Zardari", correct: false },
     ],
