@@ -723,7 +723,6 @@ const createAccount = () => {
             user.password === accountDeleteUserInfo.password
           );
         });
-        console.log(userFind);
         if (userFind) {
           userCheck = userCheck.filter((e) => {
             return (
@@ -743,6 +742,9 @@ const createAccount = () => {
             userPageUnVisible();
             signUpFormVisible();
             createAcountBtnsvisible();
+            setTimeout(() => {
+              location.reload;
+            }, 1000);
           }
           gsap.to(confirmEmailLabel, {
             x: "-200%",
