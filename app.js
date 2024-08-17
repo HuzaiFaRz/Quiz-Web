@@ -455,6 +455,9 @@ const startQuiz = () => {
       formAlertUnVisibleautomatic();
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
       formAlertText.textContent = " Time Over";
+      if (formAlertText.textContent === " Time Over") {
+        quizTimer.textContent = `${0} : ${(0, 0)} `;
+      }
     }
   }, 1000);
   quizQuestionText.textContent = `Q${quizQuestionIndex + 1}. ${
@@ -500,7 +503,7 @@ const quizQuestionUpdate = () => {
     timerMint = 0;
     timerSecond = 0;
     clearInterval(quizTimerSet);
-    quizTimer.textContent = `${0} : ${(0, 0)} `;
+
     quizHeaderTopMove();
     // correctAnswerVisible();
     quizBodyUnVisible();
@@ -509,6 +512,9 @@ const quizQuestionUpdate = () => {
     formAlertUnVisibleautomatic();
     formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
     formAlertText.textContent = " Quiz Complete";
+    if (formAlertText.textContent === " Quiz Complete") {
+      quizTimer.textContent = `${0} : ${(0, 0)} `;
+    }
   }
 
   quizQuestionText.textContent = `Q${quizQuestionIndex + 1}. ${
