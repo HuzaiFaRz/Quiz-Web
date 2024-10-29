@@ -4,17 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz Web Application</title>
-    <link rel="shortcut icon" href="favicon-1.png" type="image/x-icon" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    <link rel="shortcut icon" href="favicon-2.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -43,6 +33,7 @@
               id="name"
               placeholder="Name"
               name="name"
+         
             />
           </label>
           <label for="signup-email" class="signup-email-label">
@@ -53,6 +44,7 @@
               id="signup-email"
               placeholder="Email"
               name="signupemail"
+     
             />
           </label>
           <label for="signup-password" class="signup-password-label">
@@ -64,6 +56,7 @@
               placeholder="Password"
               name="signuppassword"
               class="password-input"
+    
             />
 
             <i class="passowrd-eye"></i>
@@ -80,10 +73,11 @@
               placeholder="Confirm Password"
               name="signupconfirmpassword"
               class="password-input"
+     
             />
             <i class="passowrd-eye"></i>
           </label>
-          <button type="submit" class="signup-submit-btn">Sign_Up</button>
+          <button type="submit" class="signup-submit-btn">Sign Up</button>
         </form>
 
         <form class="signin-form">
@@ -96,6 +90,7 @@
               id="signin-email"
               placeholder="Email"
               name="signinemail"
+              value="huzaifa@gmail.com"
             />
           </label>
           <label for="signin-password" class="signin-password-label">
@@ -107,16 +102,17 @@
               placeholder="Password"
               name="signinpassword"
               class="password-input"
+              value="12345678"
             />
             <i class="passowrd-eye"></i>
           </label>
-          <button type="submit" class="signin-submit-btn">Sign_In</button>
+          <button type="submit" class="signin-submit-btn">Sign In</button>
         </form>
 
         <div class="user-page">
           <div class="user-page-header">
-            <div class="logout-btn">Log Out</div>
             <form class="account-delete-form">
+              <div class="logout-btn">Log Out</div>
               <label for="confirm-email" class="confirm-email-label">
                 Confirm Email *
                 <input
@@ -155,7 +151,6 @@
 
         <div class="quiz">
           <div class="quiz-header">
-            <!-- <div class="correctanswer"></div> -->
             <div class="quiz-timer"></div>
           </div>
 
@@ -173,12 +168,6 @@
       </div>
     </main>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
     <script src="app.js"></script>
   </body>
 </html>

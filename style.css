@@ -2,8 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Jost", sans-serif;
-  transition: all 0.2s linear;
+  transition: all 0.3s ease-in-out;
   user-select: none;
 }
 html,
@@ -13,6 +12,10 @@ body {
   overflow: hidden;
 }
 
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+}
 input:focus {
   background-color: rgb(255, 238, 5, 0.1);
 }
@@ -25,10 +28,9 @@ input:-internal-autofill-selected {
 }
 
 main {
-  position: relative;
   width: 100%;
   height: 100vh;
-  background-image: url(patrick-tomasso-QMDap1TAu0g-unsplash.jpg);
+  background-image: url(69.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -36,45 +38,38 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-main::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgb(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
+  font-size: 30px;
+  color: white;
 }
 
 .account-page {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .signin-form,
 .signup-form {
-  position: absolute;
-  background: url(erik-mclean-sxiSod0tyYQ-unsplash.jpg) no-repeat;
+  width: 500px;
+  background-color: rgb(0, 0, 0, 0.5);
   background-position: center;
   background-size: cover;
-  border-radius: 20px 20px 0 50px;
   padding: 20px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
+
 .account-Btns {
+  position: fixed;
+  top: 0;
+  background-color: rgb(0, 0, 0, 0.5);
   width: 100%;
   padding: 20px 0;
   display: flex;
@@ -88,8 +83,9 @@ main::before {
   position: absolute;
   top: -30%;
   width: 100%;
+  background-color: rgb(0, 0, 0, 0.5);
   padding: 20px 20px;
-  background-color: rgb(255, 0, 0, 0.8);
+  color: red;
   z-index: 1111111111;
   display: flex;
   justify-content: space-between;
@@ -103,46 +99,24 @@ main::before {
   align-items: center;
   gap: 5px;
 }
+
 .form-alert-close,
-.form-alert > div > i,
-.form-alert-text {
+.form-alert > div > i {
   cursor: pointer;
-  color: white;
   font-size: 25px;
   letter-spacing: 1px;
-  font-weight: 300;
+  font-weight: 600;
 }
+
+.form-alert-text {
+  cursor: pointer;
+  font-size: 25px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
 .signin-form {
-  width: 50%;
-  opacity: 0;
-  top: 30%;
-  visibility: hidden;
-  transform: translateY(-30%);
-  transform: translateX(-150%);
-}
-
-.signup-form {
-  width: 50%;
-  opacity: 1;
-  top: 15%;
-  transform: translateY(-15%);
-  transform: translateX(0%);
-}
-
-.signin-form::before,
-.signup-form::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgb(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-  border: 1px solid #ffee05;
-  border-radius: 20px 20px 0 50px;
+  display: none;
 }
 
 .signin-form > h1,
@@ -150,25 +124,18 @@ main::before {
   font-size: 2rem;
   font-weight: 300;
   z-index: 1111;
-  text-shadow: 5px 5px 30px #ffee05;
+  text-shadow: 5px 5px 30px white;
   color: white;
-  text-decoration: underline #ffee05;
+  text-decoration: underline white;
   text-underline-offset: 20px;
 }
-.signin-email-label,
-.signin-password-label,
-.name-label,
-.signup-email-label,
-.signup-password-label,
-.signup-confirm-password-label,
-.confirm-email-label,
-.confirm-password-delete-label {
+label {
   position: relative;
   font-weight: 300;
   cursor: pointer;
   z-index: 1111;
   width: 100%;
-  color: #ffee05;
+  color: white;
   font-size: 1rem;
   display: flex;
   flex-direction: column;
@@ -179,7 +146,8 @@ main::before {
 }
 
 .passowrd-eye {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgba(255,238,5,1)'%3E%3Cpath fill='none' d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M4.52047 5.93457L1.39366 2.80777L2.80788 1.39355L22.6069 21.1925L21.1927 22.6068L17.8827 19.2968C16.1814 20.3755 14.1638 21.0002 12.0003 21.0002C6.60812 21.0002 2.12215 17.1204 1.18164 12.0002C1.61832 9.62282 2.81932 7.5129 4.52047 5.93457ZM14.7577 16.1718L13.2937 14.7078C12.902 14.8952 12.4634 15.0002 12.0003 15.0002C10.3434 15.0002 9.00026 13.657 9.00026 12.0002C9.00026 11.537 9.10522 11.0984 9.29263 10.7067L7.82866 9.24277C7.30514 10.0332 7.00026 10.9811 7.00026 12.0002C7.00026 14.7616 9.23884 17.0002 12.0003 17.0002C13.0193 17.0002 13.9672 16.6953 14.7577 16.1718ZM7.97446 3.76015C9.22127 3.26959 10.5793 3.00016 12.0003 3.00016C17.3924 3.00016 21.8784 6.87992 22.8189 12.0002C22.5067 13.6998 21.8038 15.2628 20.8068 16.5925L16.947 12.7327C16.9821 12.4936 17.0003 12.249 17.0003 12.0002C17.0003 9.23873 14.7617 7.00016 12.0003 7.00016C11.7514 7.00016 11.5068 7.01833 11.2677 7.05343L7.97446 3.76015Z'%3E%3C/path%3E%3C/svg%3E");
+  transition: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgb(255, 255, 255)'%3E%3Cpath fill='none' d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M4.52047 5.93457L1.39366 2.80777L2.80788 1.39355L22.6069 21.1925L21.1927 22.6068L17.8827 19.2968C16.1814 20.3755 14.1638 21.0002 12.0003 21.0002C6.60812 21.0002 2.12215 17.1204 1.18164 12.0002C1.61832 9.62282 2.81932 7.5129 4.52047 5.93457ZM14.7577 16.1718L13.2937 14.7078C12.902 14.8952 12.4634 15.0002 12.0003 15.0002C10.3434 15.0002 9.00026 13.657 9.00026 12.0002C9.00026 11.537 9.10522 11.0984 9.29263 10.7067L7.82866 9.24277C7.30514 10.0332 7.00026 10.9811 7.00026 12.0002C7.00026 14.7616 9.23884 17.0002 12.0003 17.0002C13.0193 17.0002 13.9672 16.6953 14.7577 16.1718ZM7.97446 3.76015C9.22127 3.26959 10.5793 3.00016 12.0003 3.00016C17.3924 3.00016 21.8784 6.87992 22.8189 12.0002C22.5067 13.6998 21.8038 15.2628 20.8068 16.5925L16.947 12.7327C16.9821 12.4936 17.0003 12.249 17.0003 12.0002C17.0003 9.23873 14.7617 7.00016 12.0003 7.00016C11.7514 7.00016 11.5068 7.01833 11.2677 7.05343L7.97446 3.76015Z'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: center;
@@ -193,177 +161,62 @@ main::before {
   z-index: 114441;
 }
 .passwordEyeCut {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgba(255,238,5,1)'%3E%3Cpath fill='none' d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12ZM12.0003 17C14.7617 17 17.0003 14.7614 17.0003 12C17.0003 9.23858 14.7617 7 12.0003 7C9.23884 7 7.00026 9.23858 7.00026 12C7.00026 14.7614 9.23884 17 12.0003 17ZM12.0003 15C10.3434 15 9.00026 13.6569 9.00026 12C9.00026 10.3431 10.3434 9 12.0003 9C13.6571 9 15.0003 10.3431 15.0003 12C15.0003 13.6569 13.6571 15 12.0003 15Z'%3E%3C/path%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='rgb(255, 255, 255)'%3E%3Cpath fill='none' d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12ZM12.0003 17C14.7617 17 17.0003 14.7614 17.0003 12C17.0003 9.23858 14.7617 7 12.0003 7C9.23884 7 7.00026 9.23858 7.00026 12C7.00026 14.7614 9.23884 17 12.0003 17ZM12.0003 15C10.3434 15 9.00026 13.6569 9.00026 12C9.00026 10.3431 10.3434 9 12.0003 9C13.6571 9 15.0003 10.3431 15.0003 12C15.0003 13.6569 13.6571 15 12.0003 15Z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-#signin-email,
-#signin-password,
-#name,
-#signup-email,
-#signup-password,
-#signup-confirm-password,
-#confirm-email,
-#confirm-password-delete {
+input {
   font-weight: 400;
   letter-spacing: 1px;
   z-index: 1111;
   width: 100%;
-  background-color: rgb(255, 238, 5, 0.1);
+  background-color: rgb(0, 0, 0, 0.5);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid white;
   color: white;
   box-shadow: none;
-  border: none;
   font-size: 1rem;
   padding: 15px 15px;
-  /* height: 50px; */
-  /* border-radius: 3rem 6rem 0 5rem; */
 }
 
-#signin-email:focus,
-#signin-password:focus,
-#name:focus,
-#signup-email:focus,
-#signup-password:focus,
-#signup-confirm-password:focus,
-#confirm-email:focus,
-#confirm-password-delete:focus {
+input:focus {
   outline: none;
 }
-#signin-email::placeholder,
-#signin-password::placeholder,
-#name::placeholder,
-#signup-email::placeholder,
-#signup-password::placeholder,
-#signup-confirm-password::placeholder,
-#confirm-email::placeholder,
-#confirm-password-delete::placeholder {
+
+input::placeholder {
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.5px;
   color: white;
 }
+
 .signup-submit-btn,
-.signin-submit-btn {
-  transition: 0.4s ease-in-out;
-  position: relative;
-  padding: 10px 20px;
-  z-index: 1111;
-  background-color: rgb(255, 238, 5, 0.1);
-  color: white;
-  box-shadow: none;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-}
-.signup-submit-btn::before,
-.signup-submit-btn::after,
-.signin-submit-btn::before,
-.signin-submit-btn::after {
-  transition: 0.3s ease-in-out;
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.signup-submit-btn::after,
-.signin-submit-btn::after {
-  transition: 0.3s ease-in-out;
-  top: -8px;
-  left: -8px;
-  border-top: 1px solid transparent;
-  border-left: 1px solid transparent;
-}
-.signup-submit-btn::before,
-.signin-submit-btn::before {
-  transition: 0.3s ease-in-out;
-  bottom: -8px;
-  right: -8px;
-  border-bottom: 1px solid transparent;
-  border-right: 1px solid transparent;
-}
-.signup-submit-btn:hover::before,
-.signup-submit-btn:hover::after,
-.signin-submit-btn:hover::before,
-.signin-submit-btn:hover::after {
-  transition: 0.4s ease-in-out;
-  width: calc(100% + 15px);
-  height: calc(100% + 15px);
-  border-color: #ffee05;
-}
-
-.signup-submit-btn:hover,
-.signin-submit-btn:hover {
-  transition: 0.2s ease-in-out;
-  transform: scale(1.1);
-  border-radius: 20px 20px 0 20px;
-  background-color: rgb(255, 238, 5, 0.3);
-}
-
+.signin-submit-btn,
 .SignUpButton,
 .SignInButton {
-  transition: 0.4s ease-in-out;
-  position: relative;
-  display: inline-flex;
   padding: 10px 20px;
   z-index: 1111;
-  background-color: rgb(255, 238, 5, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   color: white;
   font-weight: 400;
   letter-spacing: 1px;
-  box-shadow: none;
   border: none;
   font-size: 1rem;
   cursor: pointer;
+  text-underline-offset: 5px;
 }
+.start-quiz-btn:hover,
+.logout-btn:hover,
+.deleteaccount-btn:hover,
+.signup-submit-btn:hover,
+.signin-submit-btn:hover,
 .SignUpButton:hover,
 .SignInButton:hover {
-  transition: 0.2s ease-in-out;
-  border-radius: 20px 20px 0 20px;
+  text-decoration: underline;
+  transform: scale(1.1);
 }
-.SignUpButton::before,
-.SignUpButton::after,
-.SignInButton::before,
-.SignInButton::after {
-  transition: 0.3s ease-in-out;
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.SignUpButton::after,
-.SignInButton::after {
-  transition: 0.3s ease-in-out;
-  top: -8px;
-  left: -8px;
-  border-top: 1px solid transparent;
-  border-left: 1px solid transparent;
-}
-.SignUpButton::before,
-.SignInButton::before {
-  transition: 0.3s ease-in-out;
-  bottom: -8px;
-  right: -8px;
-  border-bottom: 1px solid transparent;
-  border-right: 1px solid transparent;
-}
-.SignUpButton:hover::before,
-.SignUpButton:hover::after,
-.SignInButton:hover::before,
-.SignInButton:hover::after {
-  transition: 0.4s ease-in-out;
-  width: calc(100% + 15px);
-  height: calc(100% + 15px);
-  border-radius: 20px 20px 0 20px;
-  border-color: #ffee05;
-}
-
-/* .signin-form,
-.signup-form,
-.account-Btns {
-  display: none;
-} */
 
 .user-page {
   width: 100%;
@@ -383,10 +236,15 @@ main::before {
   align-items: center;
 }
 .account-delete-form {
-  width: 100%;
+  overflow: hidden;
+  width: 500px;
+  background-color: rgb(0, 0, 0, 0.5);
+  background-position: center;
+  background-size: cover;
+  padding: 20px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -400,31 +258,23 @@ main::before {
 }
 
 .user-name {
-  font-size: 3rem;
-  color: #ffee05;
+  font-size: 4rem;
+  color: white;
 }
 
 .start-quiz-btn,
 .logout-btn,
 .deleteaccount-btn {
-  transition: all 0.3s ease-in-out;
   padding: 10px 20px;
   z-index: 1111;
-  background-color: rgb(255, 238, 5, 0.3);
+  background-color: rgb(0, 0, 0, 0.9);
   border-radius: 20px;
   color: white;
   font-weight: 400;
   letter-spacing: 1px;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
-}
-
-.start-quiz-btn:hover,
-.logout-btn:hover,
-.deleteaccount-btn:hover {
-  transition: all 0.3s ease-in-out;
-  background-color: rgb(255, 238, 5, 0.1);
 }
 
 .quiz {
@@ -463,7 +313,7 @@ main::before {
   font-size: 1.6rem;
   line-height: 30px;
   font-weight: 300;
-  color: #ffee05;
+  color: white;
   background-color: rgb(0, 0, 0, 0.9);
   border-radius: 10vh 0 0 50vh;
   border: none;
@@ -476,7 +326,7 @@ main::before {
   justify-content: space-evenly;
   align-items: center;
   border-radius: 12px;
-  background-color: rgb(0, 0, 0, 0.3);
+  background-color: rgb(0, 0, 0, 0.5);
   padding: 0 18px;
 }
 
@@ -504,9 +354,9 @@ main::before {
   padding: 10px 20px;
   font-size: 1rem;
   line-height: 30px;
-  font-weight: 300;
-  color: #ffee05;
-  background-color: rgb(0, 0, 0, 0.9);
+  font-weight: 400;
+  color: white;
+  background-color: rgb(0, 0, 0, 0.5);
   border-radius: 10vh 0 0 50vh;
   border: none;
 }
@@ -514,63 +364,28 @@ main::before {
   width: auto;
   border-radius: 10vh 0 0 10vh;
 }
-.quiz-question-next:hover,
-.quiz-answer-btn:hover {
-  background-color: rgb(0, 0, 0, 0.5);
+
+.quiz-question-next:hover {
+  color: white;
+  background-color: rgb(0, 0, 0, 0.9);
 }
 
 @media (max-width: 1400px) {
-  .signin-form,
-  .signup-form {
-    padding: 15px 15px;
-    width: 80%;
-    top: 15%;
-  }
-  .signup-form {
-    width: 80%;
-  }
-
-  .signin-form {
-    width: 50%;
-    top: 30%;
-    transform: translateY(-30%);
-  }
   .signin-form > h1,
   .signup-form > h1 {
     font-size: 2rem;
   }
-  .signin-email-label,
-  .signin-password-label,
-  .name-label,
-  .signup-email-label,
-  .signup-password-label,
-  .signup-confirm-password-label {
+  label {
     font-size: 1rem;
     gap: 5px 5px;
     padding: 15px 15px;
   }
 
-  #signin-email,
-  #signin-password,
-  #name,
-  #signup-email,
-  #signup-password,
-  #signup-confirm-password {
+  input {
     font-size: 15px;
   }
-
-  #signin-email::placeholder,
-  #signin-password::placeholder,
-  #name::placeholder,
-  #signup-email::placeholder,
-  #signup-password::placeholder,
-  #signup-confirm-password::placeholder {
+  input::placeholder {
     font-size: 1rem;
-  }
-
-  .account-Btns {
-    height: 10%;
-    top: 2%;
   }
 
   .SignUpButton,
@@ -580,9 +395,14 @@ main::before {
   }
 }
 
-@media (max-width: 900px) {
-  .signin-form {
-    width: 80%;
+@media (max-width: 550px) {
+  .account-page {
+    padding: 0 20px;
+  }
+  .account-delete-form,
+  .signin-form,
+  .signup-form {
+    width: 100%;
   }
 }
 
@@ -599,35 +419,14 @@ main::before {
     top: 50%;
     transform: translateY(50%);
   }
-  .signin-email-label,
-  .signin-password-label,
-  .name-label,
-  .signup-email-label,
-  .signup-password-label,
-  .signup-confirm-password-label,
-  .confirm-email-label,
-  .confirm-password-delete-label {
+  label {
     font-size: 0.9rem;
   }
 
-  #signin-email,
-  #signin-password,
-  #name,
-  #signup-email,
-  #signup-password,
-  #signup-confirm-password,
-  #confirm-email,
-  #confirm-password-delete {
+  input {
     font-size: 0.8rem;
   }
-  #signin-email::placeholder,
-  #signin-password::placeholder,
-  #name::placeholder,
-  #signup-email::placeholder,
-  #signup-password::placeholder,
-  #signup-confirm-password::placeholder,
-  #confirm-email::placeholder,
-  #confirm-password-delete::placeholder {
+  input::placeholder {
     font-size: 0.8rem;
   }
 
@@ -667,16 +466,5 @@ main::before {
 
   .form-alert-text {
     font-size: 1rem;
-  }
-}
-
-@media (max-width: 350px) {
-  .account-page {
-    padding: 20px 0 !important;
-  }
-  .signin-form,
-  .signup-form {
-    padding: 15px 15px;
-    width: 100%;
   }
 }

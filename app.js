@@ -42,38 +42,24 @@ let signUpUserInfoSave = JSON.parse(localStorage.getItem(USER_KEY)) || [];
 let deleteAccountBtnCount = 0;
 
 const formAlertVisible = () => {
-  gsap.to(formAlert, {
-    top: 0,
-    backgroundColor: "rgb(255, 0, 0, 0.8)",
-    duration: 0.6,
-    ease: Power3.easeInOut,
-  });
+  formAlert.style.top = "0%";
+  formAlertText.style.color = "red";
+  formAlert.style.backgroundColor = "black";
 };
 
 const formAlertVisibleSuccess = () => {
-  gsap.to(formAlert, {
-    top: 0,
-    backgroundColor: "rgb(0, 128, 0, 0.8)",
-    duration: 0.6,
-    ease: Power3.easeInOut,
-  });
+  formAlert.style.top = "0%";
+  formAlert.style.backgroundColor = "black";
+  formAlertText.style.color = "#12ff12";
 };
 
 const formAlertUnVisible = () => {
-  gsap.to(formAlert, {
-    top: "-30%",
-    duration: 0.6,
-    ease: Power3.easeInOut,
-  });
+  formAlert.style.top = "-30%";
 };
 
 const formAlertUnVisibleautomatic = () => {
   setTimeout(() => {
-    gsap.to(formAlert, {
-      top: "-30%",
-      duration: 0.6,
-      ease: Power3.easeInOut,
-    });
+    formAlert.style.top = "-30%";
   }, 2000);
 };
 
@@ -81,152 +67,69 @@ const formAlertIconChanger = () => {
   formAlertIcon.classList.replace("ri-alert-fill", "ri-check-double-fill");
 };
 
-// const correctAnswerVisible = () => {
-//   gsap.to(correctAnswerDiv, {
-//     opacity: 1,
-//     duration: 0.5,
-//     ease: Power3.easeInOut,
-//   });
-// };
-
 const quizHeaderTopMove = () => {
-  gsap.to(quizHeader, {
-    y: "100%",
-    duration: 0.5,
-    ease: Power3.easeInOut,
-  });
+  quizHeader.style.top = "100%";
 };
+
 const signUpFormVisible = () => {
-  gsap.to(signUpForm, {
-    x: 0,
-    visibility: "visible",
-    opacity: 1,
-    duration: 0.4,
-    ease: Power3.easeInOut,
-  });
+  signUpForm.style.display = "flex";
 };
+
 const signUpFormUnVisible = () => {
-  gsap.to(signUpForm, {
-    opacity: 0,
-    visibility: "hidden",
-    x: "150%",
-    duration: 0.4,
-    ease: Power3.easeInOut,
-  });
+  signUpForm.style.display = "none";
 };
 
 const signInFormVisible = () => {
-  gsap.to(signInForm, {
-    opacity: 1,
-    visibility: "visible",
-    x: 0,
-    duration: 0.4,
-    ease: Power3.easeInOut,
-  });
+  signInForm.style.display = "flex";
 };
 
 const signInFormUnVisible = () => {
-  gsap.to(signInForm, {
-    visibility: "hidden",
-    x: "-150%",
-    opacity: 0,
-    duration: 0.4,
-    ease: Power3.easeInOut,
-  });
+  signInForm.style.display = "none";
 };
 
 const createAcountBtnsvisible = () => {
-  gsap.to(createAcountBtns, {
-    display: "flex",
-    zIndex: 1,
-    x: 0,
-    visibility: "visible",
-    opacity: 1,
-    duration: 0.4,
-    ease: Power3.easeInOut,
-  });
+  createAcountBtns.style.display = "flex";
 };
 
 const createAcountBtnsUnvisible = () => {
-  gsap.to(createAcountBtns, {
-    display: "none",
-    zIndex: 0,
-    visibility: "hidden",
-    x: "-200%",
-    opacity: 0,
-    duration: 0.4,
-    ease: Power3.easeInOut,
-  });
+  createAcountBtns.style.display = "none";
 };
+
 const quizBodyVisible = () => {
-  gsap.to(quizBody, {
-    display: "flex",
-    y: 0,
-    opacity: 1,
-    duration: 0.3,
-    ease: Power3.easeInOut,
-  });
+  quizBody.style.display = "flex";
 };
 const quizBodyUnVisible = () => {
-  gsap.to(quizBody, {
-    display: "none",
-    y: "200%",
-    opacity: 0,
-    duration: 0.3,
-    ease: Power3.easeInOut,
-  });
+  quizBody.style.display = "none";
 };
 
 const quizDivVisible = () => {
-  gsap.to(quizDiv, {
-    display: "flex",
-    y: 0,
-    opacity: 1,
-    duration: 0.3,
-    ease: Power3.easeInOut,
-  });
+  quizDiv.style.display = "flex";
 };
 
 const quizDivUnVisible = () => {
-  gsap.to(quizDiv, {
-    display: "none",
-    y: "200%",
-    opacity: 0,
-    duration: 0.3,
-    ease: Power3.easeInOut,
-  });
+  quizDiv.style.display = "none";
 };
 
 const userPageVisible = () => {
-  gsap.to(userPage, {
-    display: "flex",
-    y: 0,
-    opacity: 1,
-    duration: 0.3,
-    ease: Power3.easeInOut,
-  });
+  userPage.style.display = "flex";
 };
 const userPageUnVisible = () => {
-  gsap.to(userPage, {
-    display: "none",
-    y: "-200%",
-    opacity: 0,
-    duration: 0.3,
-    ease: Power3.easeInOut,
-  });
+  userPage.style.display = "none";
 };
 
-window.addEventListener("DOMContentLoaded", () => {
-  userPageUnVisible();
-  quizBodyUnVisible();
-  quizDivUnVisible();
-});
+window.addEventListener(
+  "DOMContentLoaded",
+  userPageUnVisible(),
+  quizBodyUnVisible(),
+  quizDivUnVisible()
+);
 
-window.addEventListener("load", () => {
-  userPageUnVisible();
-  quizBodyUnVisible();
-  quizDivUnVisible();
-});
+window.addEventListener(
+  "load",
+  userPageUnVisible(),
+  quizBodyUnVisible(),
+  quizDivUnVisible()
+);
 
 let quizQuestions = [
   {
@@ -426,7 +329,7 @@ const startQuiz = () => {
   quizAnswerIndex = 0;
 
   timerSecond = 60;
-  timerMint = 5;
+  timerMint = 3;
 
   quizTimerSet = setInterval(() => {
     timerSecond--;
@@ -438,12 +341,8 @@ const startQuiz = () => {
     }
 
     if (timerMint < 1) {
-      gsap.to(quizTimer, {
-        color: "red",
-        fontWeight: "400",
-        duration: 0.5,
-        ease: Power3.easeInOut,
-      });
+      quizTimer.style.color = "red";
+      quizTimer.style.fontWeight = "400";
     }
 
     if (timerMint < 0) {
@@ -455,9 +354,11 @@ const startQuiz = () => {
       formAlertUnVisibleautomatic();
       formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
       formAlertText.textContent = " Time Over";
-      if (formAlertText.textContent === " Time Over") {
-        quizTimer.textContent = `${0} : ${(0, 0)} `;
-      }
+      quizTimer.textContent = `0:00`;
+      quizDivUnVisible();
+      userPageVisible();
+      signUpFormUnVisible();
+      signInFormUnVisible();
     }
   }, 1000);
   quizQuestionText.textContent = `Q${quizQuestionIndex + 1}. ${
@@ -466,22 +367,18 @@ const startQuiz = () => {
   Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
     quizAnswerBtnElem.textContent =
       quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
-    gsap.to(quizAnswerBtnElem, {
-      backgroundColor: "rgb(0, 0, 0, 0.9)",
-    });
-
+    quizAnswerBtnElem.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
+    quizAnswerBtnElem.style.color = "white";
     quizAnswerBtnClicked = false;
     quizAnswerBtnElem.addEventListener("click", () => {
       quizAnswerBtnClicked = true;
       quizAnswerBtn.forEach((btn, index) => {
         if (quizQuestions[quizAnswerIndex].answers[index].correct) {
-          gsap.to(btn, {
-            backgroundColor: "rgb(0, 128, 0, 0.5)",
-          });
+          btn.style.color = "#12ff12";
+          btn.style.backgroundColor = "black";
         } else {
-          gsap.to(btn, {
-            backgroundColor: "rgb(255, 0, 0, 0.5)",
-          });
+          btn.style.color = "red";
+          btn.style.backgroundColor = "black";
         }
       });
     });
@@ -500,21 +397,18 @@ const quizQuestionUpdate = () => {
   ) {
     quizQuestionIndex = 0;
     quizAnswerIndex = 0;
-    timerMint = 0;
-    timerSecond = 0;
-    clearInterval(quizTimerSet);
-
     quizHeaderTopMove();
-    // correctAnswerVisible();
     quizBodyUnVisible();
     formAlertVisibleSuccess();
     formAlertIconChanger();
     formAlertUnVisibleautomatic();
     formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
     formAlertText.textContent = " Quiz Complete";
-    if (formAlertText.textContent === " Quiz Complete") {
-      quizTimer.textContent = `${0} : ${(0, 0)} `;
-    }
+    quizBodyUnVisible();
+    quizDivUnVisible();
+    userPageVisible();
+    signUpFormUnVisible();
+    signInFormUnVisible();
   }
 
   quizQuestionText.textContent = `Q${quizQuestionIndex + 1}. ${
@@ -523,21 +417,20 @@ const quizQuestionUpdate = () => {
   Array.from(quizAnswerBtn).forEach((quizAnswerBtnElem, quizAnswerBtnIndex) => {
     quizAnswerBtnElem.textContent =
       quizQuestions[quizAnswerIndex].answers[quizAnswerBtnIndex].answer;
-    gsap.to(quizAnswerBtnElem, {
-      backgroundColor: "rgb(0, 0, 0, 0.9)",
-    });
+
+    quizAnswerBtnElem.style.color = "white";
+    quizAnswerBtnElem.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
+
     quizAnswerBtnClicked = false;
     quizAnswerBtnElem.addEventListener("click", () => {
       quizAnswerBtnClicked = true;
       quizAnswerBtn.forEach((btn, index) => {
         if (quizQuestions[quizAnswerIndex].answers[index].correct) {
-          gsap.to(btn, {
-            backgroundColor: "rgb(0, 128, 0, 0.5)",
-          });
+          btn.style.color = "#12ff12";
+          btn.style.backgroundColor = "black";
         } else {
-          gsap.to(btn, {
-            backgroundColor: "rgb(255, 0, 0, 0.5)",
-          });
+          btn.style.color = "red";
+          btn.style.backgroundColor = "black";
         }
       });
     });
@@ -546,11 +439,9 @@ const quizQuestionUpdate = () => {
 
 quizStartBtn.addEventListener("click", () => {
   userPageUnVisible();
-  setTimeout(() => {
-    quizDivVisible();
-    quizBodyVisible();
-    startQuiz();
-  }, 0);
+  quizDivVisible();
+  quizBodyVisible();
+  startQuiz();
 });
 
 quizQuestionNextBtn.addEventListener("click", () => {
@@ -636,6 +527,8 @@ const createAccount = () => {
         formAlertCloseBtn.addEventListener("click", formAlertUnVisible);
         formAlertIconChanger();
         formAlertText.textContent = " Sign Up SuccessFully";
+        signUpFormUnVisible();
+        signInFormVisible();
       }
     }
   });
@@ -671,12 +564,10 @@ const createAccount = () => {
         formAlertIconChanger();
         formAlertText.textContent = " Sign in SuccessFully";
         if (formAlertText.textContent === " Sign in SuccessFully") {
-          setTimeout(() => {
-            signInFormUnVisible();
-            signUpFormUnVisible();
-            createAcountBtnsUnvisible();
-            userPageVisible();
-          }, 1000);
+          signInFormUnVisible();
+          signUpFormUnVisible();
+          createAcountBtnsUnvisible();
+          userPageVisible();
           userName.textContent = `Hi! ${matchingSaveData.name}`;
         }
       } else {
@@ -702,18 +593,11 @@ const createAccount = () => {
     };
 
     if (deleteAccountBtnCount === 1) {
-      gsap.to(confirmEmailLabel, {
-        x: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: Power1.easeInOut,
-      });
-      gsap.to(confirmpassworddeleteLabel, {
-        x: "0",
-        opacity: 1,
-        duration: 0.8,
-        ease: Power1.easeInOut,
-      });
+      confirmEmailLabel.style.transform = "translateX(0)";
+      confirmEmailLabel.style.opacity = 1;
+
+      confirmpassworddeleteLabel.style.transform = "translateX(0)";
+      confirmpassworddeleteLabel.style.opacity = 1;
     }
 
     if (deleteAccountBtnCount >= 2) {
@@ -752,18 +636,13 @@ const createAccount = () => {
               location.reload;
             }, 1000);
           }
-          gsap.to(confirmEmailLabel, {
-            x: "-200%",
-            opacity: 0,
-            duration: 0.6,
-            ease: Power3.easeInOut,
-          });
-          gsap.to(confirmpassworddeleteLabel, {
-            x: "200%",
-            opacity: 0,
-            duration: 0.8,
-            ease: Power1.easeInOut,
-          });
+
+          confirmEmailLabel.style.transform = "translateX(-200%)";
+          confirmEmailLabel.style.opacity = 1;
+
+          confirmpassworddeleteLabel.style.transform = "translateX(200%)";
+          confirmpassworddeleteLabel.style.opacity = 1;
+
           deleteAccountBtnCount = 0;
         } else {
           formAlertVisible();
